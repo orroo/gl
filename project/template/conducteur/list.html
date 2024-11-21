@@ -1,0 +1,63 @@
+
+
+
+<div class="space"></div>
+<div class="container  secondbody">
+    <form action="/conducteur/search/" method="get">
+        <input type="text" name="search">
+        <input type="submit" value="submit">
+    </form>
+    <table class="table">
+        <tr>
+           <th>CIN</th>
+           <th>nom</th>
+           <th>prenom</th>
+           <th>numbero de telephone</th>
+           <th>adresse</th>
+           <th>mail</th>
+           <th>date naissance</th>
+           <th>username</th>
+           <th>mot_de_passe</th>
+           <th>role</th>
+           <th>nombre de jetons</th>
+           <th>assurance</th>
+           <th>vehicule </th>
+           <th>note </th>
+           <th>num_permis</th>
+           <th>CHECK</th>
+           <th>update</th>
+           <th>delete</th>
+           
+        </tr>
+        {% for obj in list %}
+        
+            <tr>
+                <td> {{ obj.cin }}</td>
+                <td>{{ obj.nom }}</td>
+                <td>{{ obj.prenom }}</td>
+                <td>{{ obj.num_tel }}</td>
+                <td>{{ obj.adresse }}</td>
+                <td>{{ obj.mail }}</td>
+                <td>{{ obj.date_naissance }}</td>
+                <td>{{ obj.username }}</td>
+                <td>{{ obj.mot_de_passe }}</td>
+                <td>{{ obj.role }}</td>
+                <td>{{ obj.nb_jetons }}</td>
+                <td>{{ obj.assurance }}</td>
+                <td>{{ obj.vehicule }}</td>
+                <td>{{ obj.note }}</td>
+                <td>{{ obj.num_permis }}</td>
+                <td><a href="{% url 'conducteur_details' obj.cin %}"> check</a> </td>
+                <td><a href="{% url 'conducteur_update' obj.cin %}"> update</a> </td>
+                <td><a href="{% url 'conducteur_delete' obj.cin %}"> delete</a> </td>
+                
+            </tr>
+            
+        {% endfor %}
+    </table>
+    <a href="/" class="btn btn-primary">cancel</a>
+
+
+    
+
+</div>

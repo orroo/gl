@@ -51,3 +51,10 @@ def my_view_team(request):
 def my_view_testimonial(request):
     
     return render(request, 'testimonial.html')
+
+
+
+
+def my_view_form(request):
+    
+    return render(request, 'user/form.html')
