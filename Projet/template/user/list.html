@@ -1,57 +1,71 @@
+{% include "../nav.html" %}
 
+{% load static %}
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">List des Users</h4>
+  
+            </div>
+        </div>
+        <!-- Header End -->
 
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Avis</title>
+        </head>
+        <body>
+            <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+                <h1 class="text-primary" style="font-family: 'Playfair Display', serif;">USER LIST</h1>
+            </div>
+            <div style="width: 100%;">
+                <form action="/user/search/" method="get">
+                    <input type="text" name="search" class="form-control" style="margin-bottom: 10px;">
+                    <input type="submit" value="search" class="btn btn-primary rounded py-3 px-5" style="margin: 10px;">
+                </form>
+            </div>
 
-<div class="space"></div>
-<div class="container  secondbody">
-    <form action="/user/search/" method="get">
-        <input type="text" name="search">
-        <input type="submit" value="submit">
-    </form>
-    <table class="table">
-        <tr>
-           <th>CIN</th>
-           <th>nom</th>
-           <th>prenom</th>
-           <th>numbero de telephone</th>
-           <th>adresse</th>
-           <th>mail</th>
-           <th>date naissance</th>
-           <th>username</th>
-           <th>mot_de_passe</th>
-           <th>role</th>
-           <th>CHECK</th>
-           <th>update</th>
-           <th>delete</th>
-           
-        </tr>
+    <ul>
         {% for obj in list %}
-        
-            <tr>
-                <td> {{ obj.cin }}</td>
-                <td>{{ obj.nom }}</td>
-                <td>{{ obj.prenom }}</td>
-                <td>{{ obj.num_tel }}</td>
-                <td>{{ obj.adresse }}</td>
-                <td>{{ obj.mail }}</td>
-                <td>{{ obj.date_naissance }}</td>
-                <td>{{ obj.username }}</td>
-                <td>{{ obj.mot_de_passe }}</td>
-                {% if obj.nb_jetons == 0 %}
-                            <td>passager</td>
-                {% else %}
-                            <td>{{ obj.role }}</td>
-                {% endif %}
-                <td><a href="{% url 'user_details' obj.cin %}"> check</a> </td>
-                <td><a href="{% url 'user_update' obj.cin %}"> update</a> </td>
-                <td><a href="{% url 'user_delete' obj.cin %}"> delete</a> </td>
-                
-            </tr>
-            
-        {% endfor %}
-    </table>
-    <a href="/" class="btn btn-primary">cancel</a>
-
-
+            <li>
+                <div class="p-5 bg-light rounded">
+                    <div class="bg-white rounded p-4 mb-4">
+                        <!-- Display who posted and who received the avis -->
+                        <p>
+                            <strong>{{ obj.username }}</strong>
+                            (
+                                {{ obj.nom }}
+                                {{ obj.prenom }} )
+                        </p>
     
+                        <p><strong>cin : </strong>{{ obj.cin }}</p>
+                        <p><strong>numero de telephone : </strong>{{ obj.num_tel }}</p>
+                        <p><strong>mail : </strong>{{ obj.mail }}</p>
+                        <p><strong>adresse : </strong>{{ obj.adresse }}</p>
+                        <p><strong>date de naissance : </strong>{{ obj.date_naissance }}</p>
+                        <p><strong>role : </strong>{{ obj.role }}</p>
+                        <p><strong>mot de passe : </strong>{{ obj.mot_de_passe }}</p>
+                        
+    
+                        <!-- Approve and Disapprove Buttons -->
+                        <div class="mt-3">
+                            <a href="{% url 'user_details' obj.cin %}" class="btn btn-success rounded py-3 px-5"> check</a>
+                            <a href="{% url 'user_update' obj.cin %}" class="btn btn-success rounded py-3 px-5"> update</a> 
+                            <a href="{% url 'user_delete' obj.cin %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
+                        </div>
+                    </div>
+                </div>
+            </li>
+        {% empty %}
+            <p>Aucun utilisateur.</p>
+        {% endfor %}
+    </ul>
+    
+    <a href="{% url 'user_list' %}" class="btn btn-primary rounded py-3 px-5" style="margin: 10px;">return</a>
 
-</div>
+
+</body>
+</html>
+
+{% include "../footer.html" %}

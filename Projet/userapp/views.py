@@ -45,7 +45,7 @@ def detailsConf(request,ide):
 class userupdateview(UpdateView): 
     model = user
     template_name='user/form.html'
-    form_class=userform
+    form_class=upuserform
     success_url= reverse_lazy('user_list')
 
 

@@ -6,7 +6,7 @@ class conducteurform(forms.ModelForm):
         fields = '__all__'
         exclude=('nb_jetons','note')
 
-    date_naissance=forms.DateField(label="Conference Start Date",widget=forms.DateInput(attrs={'type' : 'date'}))
+    date_naissance=forms.DateField(label="Date de naissance",widget=forms.DateInput(attrs={'type' : 'date'}))
     def __init__(self, *args, **kwargs):
         super(conducteurform, self).__init__(*args, **kwargs)
         for key, value in self.fields.items():

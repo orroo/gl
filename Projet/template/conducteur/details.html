@@ -1,21 +1,63 @@
 
-<p>DETAILS:</p>
+{% include "../nav.html" %}
+
+{% load static %}
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">conducteur Profile</h4>
+  
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Profile</title>
+        </head>
+        <body>
+            <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+                <h1 class="text-primary" style="font-family: 'Playfair Display', serif;"> {{ obj.username }} Details</h1>
+            </div>
+    <ul>
+       
+        <li>
+            <div class="p-5 bg-light rounded">
+                <div class="bg-white rounded p-4 mb-4">
+                    <!-- Display who posted and who received the avis -->
+                    
+                    <p><strong>nom : </strong>{{ obj.nom }}</p>
+                    <p><strong>prenom : </strong>{{ obj.prenom }}</p>
+                    <p><strong>cin : </strong>{{ obj.cin }}</p>
+                    <p><strong>numero de telephone : </strong>{{ obj.num_tel }}</p>
+                    <p><strong>mail : </strong>{{ obj.mail }}</p>
+                    <p><strong>adresse : </strong>{{ obj.adresse }}</p>
+                    <p><strong>date de naissance : </strong>{{ obj.date_naissance }}</p>
+                    <p><strong>role : </strong>{{ obj.role }}</p>
+                    <p><strong>mot de passe : </strong>{{ obj.mot_de_passe }}</p>
+                    <p><strong>nombre de jetons : </strong>{{ obj.nb_jetons }}</p>
+                    <p><strong>assurance : </strong>{{ obj.assurance }}</p>
+                    <p><strong>vehicule : </strong>{{ obj.vehicule }}</p>
+                    <p><strong>Numero de permis : </strong>{{ obj.num_permis }}</p>
+                    <p><strong>note : </strong>{{ obj.note }}</p>
+                    
+
+                    <!-- Approve and Disapprove Buttons -->
+                    <div class="mt-3">
+                        <a href="{% url 'conducteur_update' obj.cin %}" class="btn btn-success rounded py-3 px-5"> update</a> 
+                        <a href="{% url 'conducteur_delete' obj.cin %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
     
-<p>{{ obj.cin }}</p>
-<p>{{ obj.nom }}</p>
-<p>{{ obj.prenom }}</p>
-<p>{{ obj.num_tel }}</p>
-<p>{{ obj.adresse }}</p>
-<p>{{ obj.mail }}</p>
-<p>{{ obj.date_naissance }}</p>
-<p>{{ obj.username }}</p>
-<p>{{ obj.mot_de_passe }}</p>
-<p>{{ obj.role }}</p>
-<p>{{ obj.nb_jetons }}</p>
-        
-<a href="{% url 'conducteur_list'  %}" class="btn btn-primary">return</a>
+    <a href="{% url 'conducteur_list' %}" class="btn btn-primary rounded py-3 px-5" style="margin: 10px;">return</a>
 
 
+</body>
+</html>
+{% include "../footer.html" %}
 
-
-</div>
