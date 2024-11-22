@@ -1,6 +1,162 @@
 {% include "../nav.html" %}
 
 {% load static %}
+<style>
+    /* Personnalisation de la barre du slider */
+    #price-range {
+        margin-top: 10px;
+        height: 8px; /* Hauteur de la barre */
+        width: 50%; /* Largeur ajustable */
+        margin: auto;
+        border-radius: 5px; /* Coins arrondis */
+        background: #ddd; /* Couleur de la barre de base (partie non connectée) */
+    }
+    
+    /* Couleur de la barre connectée (entre les curseurs) */
+    #price-range .noUi-connect {
+        background: linear-gradient(90deg, #ea001e, #f65656); /* Dégradé pour la partie connectée */
+        height: 100%; /* S'assure que la hauteur correspond */
+        border-radius: 5px; /* Coins arrondis pour correspondre */
+    }
+
+    /* Personnalisation du curseur */
+    #price-range .noUi-handle {
+        background: #ea001e; /* Couleur du curseur */
+        border: 2px solid #fff; /* Bordure blanche autour du curseur */
+        width: 20px; /* Largeur du curseur */
+        height: 20px; /* Hauteur du curseur */
+        border-radius: 50%; /* Donner une forme circulaire au curseur */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Ombre autour du curseur */
+    }
+
+    /* Curseur survolé */
+    #price-range .noUi-handle:hover {
+        background-color: #f65656; /* Changer la couleur du curseur au survol */
+        cursor: pointer; /* Changer le type de curseur au survol */
+        transform: scale(1.1); /* Agrandir légèrement le curseur lorsqu'il est survolé */
+        transition: all 0.3s ease; /* Animation douce lors du survol */
+    }
+
+    /* Curseur actif (quand il est déplacé) */
+    #price-range .noUi-handle:active {
+        background-color: #b30000; /* Changer la couleur du curseur lors de l'interaction */
+        transform: scale(1.2); /* Agrandir le curseur quand il est actif */
+    }
+
+    /* Curseur de gauche */
+    #price-range .noUi-handle-lower {
+        background-color: #ea001e; /* Couleur spécifique pour le curseur de gauche */
+    }
+
+    /* Curseur de droite */
+    #price-range .noUi-handle-upper {
+        background-color: #ea001e; /* Couleur spécifique pour le curseur de droite */
+    }
+    /* Masquer les tooltips au repos */
+.noUi-tooltip {
+    display: none;
+}
+
+/* Afficher les tooltips lorsque le curseur est en cours de déplacement */
+.noUi-handle:active .noUi-tooltip {
+    display: block; /* Afficher les tooltips */
+}
+
+/* Style des champs de formulaire */
+.form-floating .form-control, 
+.form-floating .form-select {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+/* Style des badges (plage de prix) */
+#price-labels .badge {
+    font-size: 1rem;
+    border-radius: 50px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Style du bouton */
+button.btn-primary {
+    background: linear-gradient(90deg, #007bff, #0056b3);
+    border: none;
+    transition: all 0.3s ease;
+}
+
+button.btn-primary:hover {
+    background: linear-gradient(90deg, #0056b3, #003d80);
+    transform: translateY(-2px);
+}
+
+/* Style des labels */
+label {
+    font-size: 0.9rem;
+}
+
+/* Ombres pour les sections */
+.shadow-sm {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Transitions douces */
+.transition {
+    transition: all 0.3s ease-in-out;
+}
+/* Style du bouton rouge */
+button.btn-danger {
+    background: linear-gradient(90deg, #dc3545, #b02a37); /* Dégradé rouge */
+    border: none;
+    color: white;
+    transition: all 0.3s ease; /* Animation douce */
+}
+
+button.btn-danger:hover {
+    background: linear-gradient(90deg, #b02a37, #861926); /* Dégradé plus sombre au survol */
+    transform: translateY(-2px); /* Légère élévation au survol */
+}
+
+button.btn-danger:focus {
+    box-shadow: 0 0 8px rgba(220, 53, 69, 0.6); /* Lueur rouge lors du focus */
+}
+
+
+</style>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var slider = document.getElementById('price-range');
+
+        noUiSlider.create(slider, {
+            start: [{{ min_price|default:0 }}, {{ max_price|default:1000 }}],  // Valeurs par défaut
+            connect: true,  // Relier les deux curseurs
+            range: {
+                'min': 0,  // Plage minimum
+                'max': 1000  // Plage maximum
+            },
+            step: 10,  // Valeur d'incrément
+            tooltips: true,  // Afficher les tooltips avec les valeurs
+            format: {
+                to: function (value) {
+                    return Math.round(value);  // Arrondir la valeur
+                },
+                from: function (value) {
+                    return value;  // Récupérer la valeur sans modification
+                }
+            }
+        });
+
+        // Mettre à jour les champs cachés quand le slider est ajusté
+        slider.noUiSlider.on('update', function(values, handle) {
+            document.getElementById('min_price').value = values[0];
+            document.getElementById('max_price').value = values[1];
+        });
+    });
+</script>
+
+
 
         <!-- Header Start -->
         <div class="container-fluid bg-breadcrumb">
@@ -16,36 +172,58 @@
         <!-- Header End -->
 
         <!-- Services Start -->
-        <div class="container py-3">
-            <form method="get" class="row g-3">
+        <div class="container py-5">
+            <form method="get" class="row g-4 bg-light p-4 rounded shadow-sm">
+                <!-- Titre du formulaire -->
+                <div class="col-12 text-center">
+                    <h2 class="text-primary fw-bold">Trouvez l'offre parfaite</h2>
+                    <p class="text-muted">Utilisez les filtres ci-dessous pour affiner votre recherche.</p>
+                </div>
+        
                 <!-- Recherche par mot-clé -->
                 <div class="col-md-4">
-                    <input type="text" name="q" class="form-control" placeholder="Rechercher une offre" value="{{ q }}">
+                    <div class="form-floating">
+                        <input type="text" name="q" class="form-control border-primary shadow-sm" id="keyword-search" placeholder="Rechercher une offre" value="{{ q }}">
+                        <label for="keyword-search" class="text-muted">Rechercher une offre</label>
+                    </div>
                 </div>
-        
-                <!-- Filtrage par plage de prix -->
-                <div class="col-md-3">
-                    <input type="number" name="min_price" class="form-control" placeholder="Prix minimum" value="{{ min_price }}">
-                </div>
-                <div class="col-md-3">
-                    <input type="number" name="max_price" class="form-control" placeholder="Prix maximum" value="{{ max_price }}">
-                </div>
-        
                 <!-- Tri par prix -->
-                <div class="col-md-2">
-                    <select name="sort_by" class="form-select">
-                        <option value="">Trier par</option>
-                        <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Prix croissant</option>
-                        <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Prix décroissant</option>
-                    </select>
+                <div class="col-md-3">
+                    <div class="form-floating">
+                        <select name="sort_by" class="form-select border-primary shadow-sm" id="sort-options">
+                            <option value="">Trier par</option>
+                            <option value="price_asc" {% if sort_by == 'price_asc' %}selected{% endif %}>Prix croissant</option>
+                            <option value="price_desc" {% if sort_by == 'price_desc' %}selected{% endif %}>Prix décroissant</option>
+                        </select>
+                        <label for="sort-options" class="text-muted">Trier par</label>
+                    </div>
                 </div>
+
+                <!-- Plage par prix -->
+                <div class="col-md-5">
+                    <label for="price-range" class="form-label fw-bold text-primary">Plage de prix :</label>
+                    <div id="price-range-container" style="position: relative;">
+                        <div id="price-range" class="border border-primary rounded"></div>
+                        <div id="price-labels" class="d-flex justify-content-between mt-2">
+                            <span id="min-price-label" class="badge bg-primary p-2">{{ min_price }}</span>
+                            <span id="max-price-label" class="badge bg-primary p-2">{{ max_price }}</span>
+                        </div>
+                    </div>
+                    <input type="hidden" name="min_price" id="min_price" value="{{ min_price }}">
+                    <input type="hidden" name="max_price" id="max_price" value="{{ max_price }}">
+                </div>
+        
         
                 <!-- Bouton de soumission -->
-                <div class="col-md-12 text-center mt-3">
-                    <button type="submit" class="btn btn-primary">Rechercher</button>
+                <div class="col-12 text-center mt-3">
+                    <button type="submit" class="btn btn-danger btn-lg px-5 shadow-sm">
+                        <i class="fas fa-search"></i> Rechercher
+                    </button>
+                    
                 </div>
             </form>
         </div>
+        
         
 
         <div class="container-fluid service py-5">
