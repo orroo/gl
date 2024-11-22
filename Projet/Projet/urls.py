@@ -23,4 +23,5 @@ urlpatterns = [
     path('user/',include('userapp.urls')),
     path('passager/',include('passagerapp.urls')),
     path('conducteur/',include('conducteurapp.urls')),
+    path('catalogue/',include('Catalogue.urls')),
 ]
