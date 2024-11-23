@@ -1,0 +1,271 @@
+{% load static %}
+
+
+        <!-- Carousel Start -->
+        <div class="header-carousel">
+            <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                
+                <div class="carousel-inner" role="listbox">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/imagebg.jpg' %}" class="img-fluid" style="width: 100vw; height:100%;" alt="First slide"/>
+                        
+                        <div class="carousel-caption">
+                            <div class="container py-4">
+                                <div class="row g-5">
+                                    <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                        <div class="bg-secondary rounded p-5">
+                                            <h4 class="text-white mb-4" style="text-align:center;">Registration</h4>
+                                            <form method="POST" action="{% url 'register_page' %}">
+                                                {% csrf_token %}
+                                                <div class="row g-3">
+                                                </div>
+                                                    <!-- First Name -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-user"></span><span class="ms-1">First Name</span>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="first_name" placeholder="First Name" required>
+                                                </div>
+                                                <small id="first_name_error" class="form-text text-danger"></small>
+                                            </div>
+
+                                            <!-- Champ Nom -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-user"></span><span class="ms-1">Last Name</span>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="last_name" placeholder="Last Name" required>
+                                                </div>
+                                                <small id="last_name_error" class="form-text text-danger"></small>
+                                            </div>
+
+                                            <!-- Champ CIN -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-id-card"></span><span class="ms-1">CIN</span>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="cin" placeholder="CIN" required>
+                                                </div>
+                                                <small id="cin_error" class="form-text text-danger"></small>
+                                            </div>
+
+                                            <!-- Champ Téléphone -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-phone"></span><span class="ms-1">Phone Number</span>
+                                                    </div>
+                                                    <input class="form-control" type="tel" id="phone" placeholder="Phone Number" required>
+                                                </div>
+                                                <small id="phone_error" class="form-text text-danger"></small>
+                                            </div>
+
+                                            <!-- Champ Adresse -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-map-marker-alt"></span><span class="ms-1">Address</span>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="address" placeholder="Address" required>
+                                                </div>
+                                                <small id="address_error" class="form-text text-danger"></small>
+                                            </div>
+
+                                            <!-- Champ Email -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-envelope"></span><span class="ms-1">Email</span>
+                                                    </div>
+                                                    <input class="form-control" type="email" id="email" name="email" placeholder="Email" value="{{ form.email.value }}" required>
+                                                </div>
+                                                {% if form.email.errors %}
+                                                    <small class="form-text text-danger">
+                                                        {% for error in form.email.errors %}
+                                                            <p>{{ error }}</p>
+                                                        {% endfor %}
+                                                    </small>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Champ Mot de passe -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-lock"></span><span class="ms-1">Password</span>
+                                                    </div>
+                                                    <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
+                                                </div>
+                                                <small id="password_error" class="form-text text-danger"></small>
+                                            </div>
+                                            <!-- Champ Nom d'utilisateur -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-user"></span><span class="ms-1">Username</span>
+                                                    </div>
+                                                    <input class="form-control" type="text" id="username" name="username" placeholder="Username" value="{{ form.username.value }}" required>
+                                                </div>
+                                                {% if form.username.errors %}
+                                                    <small class="form-text text-danger">
+                                                        {% for error in form.username.errors %}
+                                                            <p>{{ error }}</p>
+                                                        {% endfor %}
+                                                    </small>
+                                                {% endif %}
+                                            </div>
+                                            <!-- Champ Confirmer Mot de passe -->
+                                            <div class="col-md-6">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-lock"></span><span class="ms-1">Confirm Password</span>
+                                                    </div>
+                                                    <input class="form-control" type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+                                                </div>
+                                                <small id="confirm_password_error" class="form-text text-danger"></small>
+                                            </div>
+                                            <!-- Bouton de soumission -->
+                                            <div class="col-12">
+                                                <button class="btn btn-primary py-3 w-100" type="submit">Sign up</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <script>
+                                        document.querySelector("#registration-form").addEventListener("submit", function(e) {
+                                            e.preventDefault(); // Empêcher la soumission classique du formulaire
+                                    
+                                            let formData = new FormData(this);
+                                    
+                                            fetch("{% url 'register_page' %}", {
+                                                method: "POST",
+                                                headers: {
+                                                    "X-CSRFToken": document.querySelector('[name=csrfmiddlewaretoken]').value
+                                                },
+                                                body: formData
+                                            })
+                                            .then(response => response.json()) // Convertir la réponse en JSON
+                                            .then(data => {
+                                                console.log(data); // Afficher la réponse complète dans la console
+                                    
+                                                if (data.success) {
+                                                    // En cas de succès, vous pouvez rediriger l'utilisateur
+                                                    alert(data.message); // Afficher un message de succès
+                                                    window.location.href = "{% url 'login_page' %}"; // Rediriger vers la page de connexion
+                                                } else {
+                                                    // Afficher l'erreur dans la console seulement, et non dans l'interface utilisateur
+                                                    console.error("Erreur:", data.error); // Affiche l'erreur dans la console du navigateur
+                                                }
+                                            })
+                                            .catch(error => {
+                                                // En cas d'erreur de requête ou autre
+                                                console.error("Erreur de requête:", error); // Afficher l'erreur dans la console
+                                            });
+                                        });
+                                    </script>
+                                            <div id="responseMessage" class="mt-3"></div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
+                                        <div class="text-start">
+                                            <h1 class="display-5 text-white">Drive Smart, Save More. Ride Together, Empower Your Journey!</h1>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Carousel End -->
+        <script>
+            document.querySelector("form").addEventListener("submit", function(event) {
+                var password = document.getElementById("password").value;
+                var confirmPassword = document.getElementById("confirm_password").value;
+                var email = document.getElementById("email").value;
+                var username = document.getElementById("username").value;
+                var cin = document.getElementById("cin").value;
+                var phone = document.getElementById("phone").value;
+                var firstName = document.getElementById("first_name").value;
+                var lastName = document.getElementById("last_name").value;
+                var address = document.getElementById("address").value;
+            
+                var errors = [];
+            
+                // Réinitialiser les messages d'erreur
+                document.querySelectorAll('.form-text').forEach(function(element) {
+                    element.textContent = '';
+                });
+            
+                // Vérification si les mots de passe correspondent
+                if (password !== confirmPassword) {
+                    errors.push("Les mots de passe ne correspondent pas.");
+                    document.getElementById("confirm_password_error").textContent = "Les mots de passe ne correspondent pas.";
+                }
+            
+                // Vérification du mot de passe minimal (8 caractères)
+                if (password.length < 8) {
+                    errors.push("Le mot de passe doit contenir au moins 8 caractères.");
+                    document.getElementById("password_error").textContent = "Le mot de passe doit contenir au moins 8 caractères.";
+                }
+            
+                // Vérification de l'email (fonction de validation)
+                if (!email || !validateEmail(email)) {
+                    errors.push("L'adresse email doit appartenir au domaine @esprit.tn.");
+                    document.getElementById("email_error").textContent = "L'adresse email doit appartenir au domaine @esprit.tn.";
+                }
+            
+                // Vérification du CIN (doit être un nombre de 8 chiffres)
+                if (!cin || !/^\d{8}$/.test(cin)) {
+                    errors.push("Le CIN doit contenir 8 chiffres.");
+                    document.getElementById("cin_error").textContent = "Le CIN doit contenir 8 chiffres.";
+                }
+            
+                // Vérification du numéro de téléphone
+                if (!phone || !/^\d{8}$/.test(phone)) {
+                    errors.push("Le numéro de téléphone doit contenir 8 chiffres.");
+                    document.getElementById("phone_error").textContent = "Le numéro de téléphone doit contenir 8 chiffres.";
+                }
+            
+                // Vérification de la présence du prénom et nom
+                if (!firstName || !lastName) {
+                    errors.push("Le prénom et le nom sont requis.");
+                    document.getElementById("first_name_error").textContent = "Le prénom est requis.";
+                    document.getElementById("last_name_error").textContent = "Le nom est requis.";
+                }
+            
+                // Vérification de l'adresse
+                if (!address) {
+                    errors.push("L'adresse est requise.");
+                    document.getElementById("address_error").textContent = "L'adresse est requise.";
+                }
+            
+                // Vérification de l'unicité côté client pour l'email et le nom d'utilisateur
+                var existingEmails = ["user1@esprit.tn", "user2@esprit.tn"];
+                var existingUsernames = ["user1", "user2"];
+            
+                if (existingEmails.includes(email)) {
+                    errors.push("L'adresse email est déjà associée à un compte.");
+                    document.getElementById("email_error").textContent = "L'adresse email est déjà associée à un compte.";
+                }
+            
+                if (existingUsernames.includes(username)) {
+                    errors.push("Le nom d'utilisateur est déjà pris.");
+                    document.getElementById("username_error").textContent = "Le nom d'utilisateur est déjà pris.";
+                }
+            
+                if (errors.length > 0) {
+                    event.preventDefault(); // Empêcher la soumission du formulaire
+                }
+            });
+            
+            function validateEmail(email) {
+                var regex = /^[a-zA-Z0-9._%+-]+@esprit\.tn$/;
+                return regex.test(email);
+            }
+        </script>
+        
+    
