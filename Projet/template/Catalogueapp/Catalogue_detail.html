@@ -24,25 +24,38 @@
                     </p>
                 </div>
                 <div class="container py-5">
-                    <div class="offer-details bg-light shadow rounded p-4">
-                        <h2 class="text-center text-primary mb-4">{{ offre.title }}</h2>
-                
-                        <ul class="list-group list-group-flush">
+                    <div class="offer-details bg-light shadow-lg rounded p-5 position-relative overflow-hidden">
+                        <!-- Background Decorative Element -->
+                        <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(0,123,255,0.1), rgba(40,167,69,0.1)); z-index: -1;"></div>
+                        
+                        <!-- Title -->
+                        <h2 class="text-center text-primary mb-4 display-4 fw-bold">
+                            <i class="fa fa-gift me-2 text-success"></i> 
+                            {{ offre.title }}
+                        </h2>
+                        
+                        <!-- Details List -->
+                        <ul class="list-group list-group-flush fs-5">
                             <li class="list-group-item"><strong>ID:</strong> {{ offre.id }}</li>
                             <li class="list-group-item"><strong>Titre:</strong> {{ offre.title }}</li>
                             <li class="list-group-item"><strong>Description:</strong> {{ offre.description }}</li>
                             <li class="list-group-item"><strong>Date de début:</strong> {{ offre.start_date }}</li>
                             <li class="list-group-item"><strong>Date de fin:</strong> {{ offre.end_date }}</li>
-                            <li class="list-group-item"><strong>Prix:</strong> {{ offre.price }} Jetons</li>
+                            <li class="list-group-item"><strong>Prix:</strong> <span class="badge bg-success fs-6">{{ offre.price }} Jetons</span></li>
                         </ul>
-                
-                        <div class="text-center mt-4">
-                            <a href="{% url 'offre_list' %}" class="btn btn-primary btn-lg px-5 rounded-pill">
-                                Retourner à la liste
+                        
+                        <!-- Action Buttons -->
+                        <div class="text-center mt-5">
+                            <a href="{% url 'offre_list' %}" class="btn btn-outline-primary btn-lg px-5 rounded-pill">
+                                <i class="fa fa-arrow-left me-2"></i>Retourner à la liste
+                            </a>
+                            <a href="#" class="btn btn-success btn-lg px-5 rounded-pill">
+                                <i class="fa fa-shopping-cart me-2"></i>Acheter
                             </a>
                         </div>
                     </div>
                 </div>
+                
             </div>  
         </div>
         <!-- Services End -->
