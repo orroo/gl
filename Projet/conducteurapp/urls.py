@@ -6,9 +6,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('create/', conducteurcreateview.as_view() , name='conducteur_create'),
     path('list/', conducteurlistview.as_view() , name='conducteur_list'),
-    path('details/<str:ide>', detailsConf , name="conducteur_details"),
-    path('update/<str:pk>', conducteurupdateview.as_view() , name="conducteur_update"),
-    path('delete/<str:pk>', Deleteconducteur.as_view() , name="conducteur_delete"),
+    path('details/<int:ide>', detailsConf , name="conducteur_details"),
+    path('update/<int:pk>', conducteurupdateview.as_view() , name="conducteur_update"),
+    path('delete/<int:pk>', Deleteconducteur.as_view() , name="conducteur_delete"),
     path('search/', searchconducteurlistview.as_view(), name='conducteur_search'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 # ?search=<str:conducteurname>

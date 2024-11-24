@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 class passagercreateview(CreateView): 
     model = passager
     template_name='passager/form.html'
-    form_class=passagerform
+    form_class=pform
     success_url= reverse_lazy('passager_list')
 
 
@@ -30,7 +30,7 @@ class passagerlistview(ListView):
 
 def detailsConf(request,ide):
     
-    passager1= passager.objects.get(cin=ide)
+    passager1= passager.objects.get(id=ide)
     
     return render(request,"passager/details.html",{"obj":passager1})
 
@@ -39,7 +39,7 @@ def detailsConf(request,ide):
 class passagerupdateview(UpdateView): 
     model = passager
     template_name='passager/form.html'
-    form_class=passagerform
+    form_class=pform
     success_url= reverse_lazy('passager_list')
 
 

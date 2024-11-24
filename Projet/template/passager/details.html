@@ -36,14 +36,14 @@
                     <p><strong>adresse : </strong>{{ obj.adresse }}</p>
                     <p><strong>date de naissance : </strong>{{ obj.date_naissance }}</p>
                     <p><strong>role : </strong>{{ obj.role }}</p>
-                    <p><strong>mot de passe : </strong>{{ obj.mot_de_passe }}</p>
+                    <p><strong>mot de passe : </strong>{{ obj.password }}</p>
                     <p><strong>nombre de jetons : </strong>{{ obj.nb_jetons }}</p>
                     
 
                     <!-- Approve and Disapprove Buttons -->
                     <div class="mt-3">
-                        <a href="{% url 'passager_update' obj.cin %}" class="btn btn-success rounded py-3 px-5"> update</a> 
-                        <a href="{% url 'passager_delete' obj.cin %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
+                        <a href="{% url 'passager_update' obj.id %}" class="btn btn-success rounded py-3 px-5"> update</a> 
+                        <a href="{% url 'passager_delete' obj.id %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
                     </div>
                 </div>
             </div>

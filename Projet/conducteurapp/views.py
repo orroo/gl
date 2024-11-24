@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 class conducteurcreateview(CreateView): 
     model = conducteur
     template_name='conducteur/form.html'
-    form_class=conducteurform
+    form_class=cform
     success_url= reverse_lazy('conducteur_list')
 
 
@@ -30,7 +30,7 @@ class conducteurlistview(ListView):
 
 def detailsConf(request,ide):
     
-    conducteur1= conducteur.objects.get(cin=ide)
+    conducteur1= conducteur.objects.get(id=ide)
     
     return render(request,"conducteur/details.html",{"obj":conducteur1})
 
@@ -39,7 +39,7 @@ def detailsConf(request,ide):
 class conducteurupdateview(UpdateView): 
     model = conducteur
     template_name='conducteur/form.html'
-    form_class=conducteurform
+    form_class=cform
     success_url= reverse_lazy('conducteur_list')
 
 

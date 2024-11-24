@@ -46,7 +46,7 @@
                         <p><strong>adresse : </strong>{{ obj.adresse }}</p>
                         <p><strong>date de naissance : </strong>{{ obj.date_naissance }}</p>
                         <p><strong>role : </strong>{{ obj.role }}</p>
-                        <p><strong>mot de passe : </strong>{{ obj.mot_de_passe }}</p>
+                        <p><strong>mot de passe : </strong>{{ obj.password }}</p>
                         <p><strong>nombre de jetons : </strong>{{ obj.nb_jetons }}</p>
                         <p><strong>assurance : </strong>{{ obj.assurance }}</p>
                         <p><strong>vehicule : </strong>{{ obj.vehicule }}</p>
@@ -56,9 +56,9 @@
 
                         <!-- Approve and Disapprove Buttons -->
                         <div class="mt-3">
-                            <a href="{% url 'conducteur_details' obj.cin %}" class="btn btn-success rounded py-3 px-5"> check</a>
-                            <a href="{% url 'conducteur_update' obj.cin %}" class="btn btn-success rounded py-3 px-5"> update</a> 
-                            <a href="{% url 'conducteur_delete' obj.cin %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
+                            <a href="{% url 'conducteur_details' obj.id %}" class="btn btn-success rounded py-3 px-5"> check</a>
+                            <a href="{% url 'conducteur_update' obj.id %}" class="btn btn-success rounded py-3 px-5"> update</a> 
+                            <a href="{% url 'conducteur_delete' obj.id %}" class="btn btn-success rounded py-3 px-5"> delete</a> 
                         </div>
                     </div>
                 </div>

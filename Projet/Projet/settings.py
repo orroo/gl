@@ -57,6 +57,14 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware', 
 ]
 
+AUTHENTICATION_BACKENDS = [
+    'userapp.backends.EmailBackend',  # Custom email-based authentication
+    # 'django.contrib.auth.backends.ModelBackend',  # Default backend for other scenarios
+]
+LOGIN_REDIRECT_URL = '/welcome'
+
+AUTH_USER_MODEL = 'userapp.user'
+
 ROOT_URLCONF = 'Projet.urls'
 
 TEMPLATES = [

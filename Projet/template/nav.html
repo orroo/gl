@@ -9,9 +9,11 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
 
-        <link href="https://cdn.jsdelivr.net/npm/nouislider@15.6.0/distribute/nouislider.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/nouislider@15.6.0/distribute/nouislider.min.js"></script>
-        
+<!-- Ajouter la feuille de style pour noUiSlider -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.css">
+
+<!-- Ajouter le script JavaScript pour noUiSlider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.0/nouislider.min.js"></script>
 
 
         <!-- Google Web Fonts -->
@@ -67,7 +69,7 @@
         <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
+                    <a href="{% url 'welcome' %}"  class="navbar-brand p-0">
                         <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>FiThnity</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -76,24 +78,26 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto py-0">
-                            <a href="/user/list" class="nav-item nav-link">Home</a>
-                            <a href="about.html" class="nav-item nav-link">About</a>
-                            <a href="service.html" class="nav-item nav-link">Service</a>
-                            <a href="blog.html" class="nav-item nav-link">Blog</a>
+                            <a href="{% url 'welcome' %}" class="nav-item nav-link">Home</a>
+                            <a href="" class="nav-item nav-link">Ride</a>
+                            <a href="" class="nav-item nav-link">Book</a>
+                
+                            <a href="{% url 'offre_list' %}" class="nav-item nav-link">Catalog</a>
+                            <a href="{% url 'avis_list' %}" class="nav-item nav-link">Avis</a>
+            
                             
                             <div class="nav-item dropdown">
-                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+                                <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="feature.html" class="dropdown-item">Our Feature</a>
-                                    <a href="cars.html" class="dropdown-item">Our Cars</a>
-                                    <a href="team.html" class="dropdown-item">Our Team</a>
-                                    <a href="testimonial.html" class="dropdown-item">Testimonial</a>
-                                    <a href="404.html" class="dropdown-item">404 Page</a>
+                                    <a href="feature.html" class="dropdown-item">Info</a>
+                                    <a href="cars.html" class="dropdown-item">Notifications</a>
+                                    <a href="team.html" class="dropdown-item">Réservation</a>
+
                                 </div>
                             </div>
-                            <a href="contact.html" class="nav-item nav-link active">Contact</a>
+                            
                         </div>
-                        <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Rejoindre</a>
+                        <a href="{% url 'user_login' %}" class="btn btn-primary rounded-pill py-2 px-4">Log out</a>
                     </div>
                 </nav>
             </div>
