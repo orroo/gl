@@ -1,0 +1,110 @@
+{% include "../nav.html" %}
+
+{% load static %}
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Our Offers</h4>
+                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Home</a></li>
+                    
+                    <li class="breadcrumb-item active text-primary">Offers</li>
+                </ol>    
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!-- Services Start -->
+        <div class="container-fluid service py-5">
+            <div class="container py-5">
+                <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                    <h1 class="display-5 text-capitalize mb-3">FiThneyti's <span class="text-primary"> offers</span></h1>
+                    <p class="mb-0">Our application stands out as the best choice, offering you exclusive benefits through our trusted partners. Enjoy a wide range of discounts and advantages tailored just for you. Simply select an offer that suits you and start enjoying the perks today!
+                    </p>
+                </div>
+                <div class="container py-5">
+                    <div class="offer-details bg-light shadow rounded p-4">
+                        <h2 class="text-center text-primary mb-4">{{ offre.title }}</h2>
+                
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>ID:</strong> {{ offre.id }}</li>
+                            <li class="list-group-item"><strong>Titre:</strong> {{ offre.title }}</li>
+                            <li class="list-group-item"><strong>Description:</strong> {{ offre.description }}</li>
+                            <li class="list-group-item"><strong>Date de début:</strong> {{ offre.start_date }}</li>
+                            <li class="list-group-item"><strong>Date de fin:</strong> {{ offre.end_date }}</li>
+                            <li class="list-group-item"><strong>Prix:</strong> {{ offre.price }} Jetons</li>
+                        </ul>
+                
+                        <div class="text-center mt-4">
+                            <a href="{% url 'offre_list' %}" class="btn btn-primary btn-lg px-5 rounded-pill">
+                                Retourner à la liste
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+        </div>
+        <!-- Services End -->
+
+        <!-- Fact Counter -->
+        <div class="container-fluid counter py-5">
+            <div class="container py-5">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="counter-item text-center">
+                            <div class="counter-item-icon mx-auto">
+                                <i class="fas fa-thumbs-up fa-2x"></i>
+                            </div>
+                            <div class="counter-counting my-3">
+                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">829</span>
+                                <span class="h1 fw-bold text-white">+</span>
+                            </div>
+                            <h4 class="text-white mb-0">Happy Clients</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                        <div class="counter-item text-center">
+                            <div class="counter-item-icon mx-auto">
+                                <i class="fas fa-car-alt fa-2x"></i>
+                            </div>
+                            <div class="counter-counting my-3">
+                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">56</span>
+                                <span class="h1 fw-bold text-white">+</span>
+                            </div>
+                            <h4 class="text-white mb-0">Number of Cars</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                        <div class="counter-item text-center">
+                            <div class="counter-item-icon mx-auto">
+                                <i class="fas fa-building fa-2x"></i>
+                            </div>
+                            <div class="counter-counting my-3">
+                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">127</span>
+                                <span class="h1 fw-bold text-white">+</span>
+                            </div>
+                            <h4 class="text-white mb-0">Car Center</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                        <div class="counter-item text-center">
+                            <div class="counter-item-icon mx-auto">
+                                <i class="fas fa-clock fa-2x"></i>
+                            </div>
+                            <div class="counter-counting my-3">
+                                <span class="text-white fs-2 fw-bold" data-toggle="counter-up">589</span>
+                                <span class="h1 fw-bold text-white">+</span>
+                            </div>
+                            <h4 class="text-white mb-0">Total kilometers</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fact Counter -->
+        <div style="height: 100px;">
+
+        </div>
+
+        {% include "../footer.html" %}
