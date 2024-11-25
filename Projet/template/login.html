@@ -45,7 +45,7 @@
         <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="{% url 'home' %}" class="navbar-brand p-0">
+                    <a href="" class="navbar-brand p-0">
                         <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Fithnity</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -55,7 +55,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         
                         </div>
-                        <a href="{% url 'choix2' %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                        <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
                     </div>
                 </nav>
             </div>
@@ -67,7 +67,7 @@
             <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
                 <div class="carousel-inner" role="listbox">
                     <div class="carousel-item active">
-                        <img src="{% static '../static/img/covoiturage.jpeg' %}" class="img-fluid" style="width: 100vw; height: 10; float: right;" alt="First slide"/>
+                        <img src="{% static 'img/fond-blanc_23-2147730801.jpeg' %}" class="img-fluid" style="width: 100vw; height: 10; float: right;" alt="First slide"/>
                         <div class="carousel-caption">
                             <div class="container py-4">
                                 <div class="row g-5 justify-content-center align-items-center" style="height: 100vh;">
@@ -76,36 +76,11 @@
                                             <h4 class="text-white mb-4">On to the journey</h4>
                                             <form method="post">
                                                 {% csrf_token %}
-                                                
                                                 {{ form.as_p }}
-                                                
-                                               
-                                                
+                                                <button type="submit">Login</button>
                                             
-                                                <!-- <div class="row g-3">
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-envelope"></span><span class="ms-1">Email</span>
-                                                            </div>
-                                                            <input class="form-control" type="email" placeholder="Enter your email" aria-label="Enter your email" required>
-                                                        </div>
-                                                    </div>
-                                                
-                                                    <div class="col-12">
-                                                        <div class="input-group">
-                                                            <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
-                                                                <span class="fas fa-lock"></span><span class="ms-1">Password</span>
-                                                            </div>
-                                                            <input class="form-control" type="password" placeholder="Enter your password" aria-label="Enter your password" required>
-                                                        </div>
-                                                    </div> -->
-                                                
-                                                    <!-- Submit Button -->
-                                                    <div class="col-12">
-                                                        <button class="btn btn-primary w-100 py-2" onclick="window.location.href='{% url 'welcome' %}';">Submit</button>
-                                                    </div>
-                                                <!-- </div> -->
+                                                <!-- Hidden field to pass the 'next' parameter for redirection -->
+                                                <input type="hidden" name="next" value="{{ next }}">
                                             </form>
                                         </div>
                                     </div>

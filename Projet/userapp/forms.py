@@ -1,6 +1,6 @@
 from django import forms
 from .models import *
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate,login
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
@@ -175,10 +175,14 @@ class loginform(forms.ModelForm):
         # Authenticate the user using Django's built-in authenticate function
         # user = authenticate(mail=email , password=password)
 
-        user = EmailBackend.authenticate(self,self.request, username=email, password=password)
+        user =self.get_user()
+        
+        #EmailBackend.authenticate(self,self.request, username=email, password=password)
         if user is None:
             raise forms.ValidationError("login failed")
         else :
+            print('nooooooooooooooooo')
+            login(self.request, user)
             return cleaned_data
         
 

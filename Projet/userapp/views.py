@@ -9,7 +9,8 @@ from django.contrib.auth.views import LoginView
 from .forms import *
 from django.urls import reverse_lazy ,reverse
 # Create your views here.
-
+from django.contrib.auth.views import LogoutView
+from django.contrib.auth import logout
 class usercreateview(CreateView): 
     model = user
     template_name='user/form.html'
@@ -32,8 +33,6 @@ class userlistview(ListView):
 #     model=user
 #     template_name="user/details.html"
 #     context_object_name="obj"
-
-
 
 
 def detailsConf(request,ide):
@@ -82,7 +81,7 @@ class searchuserlistview(ListView):
 class Login(LoginView):
     template_name="login.html"
     form_class=loginform
-    success_url=reverse_lazy('welcome')
+  
 
 # def login_view(request):
 #     if request.method == 'POST':
@@ -98,3 +97,8 @@ class Login(LoginView):
 #         form = loginform()
 
 #     return render(request, 'login.html', {'form': form})
+def logout_view(request):
+    # Log the user out
+    logout(request)
+    # Redirect to a desired page after logout, for example, the home page
+    return redirect('home')  # Replace 'home' with your desired URL name or path

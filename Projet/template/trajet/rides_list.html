@@ -1,0 +1,86 @@
+{% include "../nav.html" %}
+{% load static %}
+
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">THE RIDES</h4>
+        <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+            <li class="breadcrumb-item"><a href="{% url 'welcome' %}">Home</a></li>
+            <li class="breadcrumb-item active text-primary">rides</li>
+        </ol>    
+    </div>
+</div>
+<!-- Header End -->
+
+<h1 class="text-center mt-5"></h1>
+
+<!-- Button Section -->
+<div class="container d-flex justify-content-center mb-4">
+    <a href="{% url 'create_ride' %}" class="btn btn-primary mx-2" style="width: 200px;">Create New Ride</a>
+    <a href="{% url 'my_reservations' %}" class="btn btn-primary mx-2" style="width: 200px;">Go to My Reservations</a>
+    <a href="{% url 'my_rides' %}" class="btn btn-primary mx-2" style="width: 200px;">My Rides</a>
+</div>
+
+<!-- Search and Sort Section -->
+<div class="container my-4">
+    <form method="get" class="d-flex">
+        <input class="form-control me-2" type="search" name="q" placeholder="Search by destination or name" value="{{ search_query|default:'' }}">
+        <button class="btn btn-outline-primary" type="submit">Search</button>
+    </form>
+    <h1></h1>
+    <form method="get" class="d-flex">
+        <input type="hidden" name="q" value="{{ search_query|default:'' }}">
+
+        <select name="sort" class="form-select me-2" onchange="this.form.submit()">
+            <option value="">Sort By</option>
+            <option value="price_asc" {% if sort_option == 'price_asc' %}selected{% endif %}>Price (Lowest to Highest)</option>
+            <option value="price_desc" {% if sort_option == 'price_desc' %}selected{% endif %}>Price (Highest to Lowest)</option>
+            <option value="seats_desc" {% if sort_option == 'seats_desc' %}selected{% endif %}>Most Seats Available</option>
+            <option value="date_asc" {% if sort_option == 'date_asc' %}selected{% endif %}>Earliest Departure</option>
+            <option value="date_desc" {% if sort_option == 'date_desc' %}selected{% endif %}>Latest Departure</option>
+        </select>
+    </form>
+</div>
+
+<h1 class="text-center mt-5">Rides List</h1>
+
+<!-- Ride Cards Section -->
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for ride in page_obj %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ ride.image }}" class="card-img-top" alt="Ride Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ ride.start_point }} to {{ ride.destination }}</h5>
+                        <p class="card-text">Price: {{ ride.price }} DT</p>
+                        <p class="card-text"><strong>Seats:</strong> {{ ride.available_seats }}</p>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'ride_detail' ride.pk %}" class="btn btn-primary">View Details</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Pagination Controls -->
+<div class="d-flex justify-content-center mt-4">
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a class="page-link" href="?page=1{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_option %}&sort={{ sort_option }}{% endif %}">&laquo; First</a>
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_option %}&sort={{ sort_option }}{% endif %}">Previous</a>
+        {% endif %}
+
+        <span class="page-link">Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}</span>
+
+        {% if page_obj.has_next %}
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_option %}&sort={{ sort_option }}{% endif %}">Next</a>
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if search_query %}&q={{ search_query }}{% endif %}{% if sort_option %}&sort={{ sort_option }}{% endif %}">Last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
+{% include "../footer.html" %}

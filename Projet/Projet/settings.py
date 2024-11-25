@@ -44,8 +44,15 @@ INSTALLED_APPS = [
     'Catalogue',
     'rest_framework',
     'corsheaders',
+    'Rides',
 ]
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default session engine
 
+# Session cookie age (default 300 seconds = 5 minutes)
+SESSION_COOKIE_AGE = 3600  # 1 hour for example
+
+# Use secure cookies (set to True in production)
+SESSION_COOKIE_SECURE = False  # Should be True for HTTPS
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -58,10 +65,12 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'userapp.backends.EmailBackend',  # Custom email-based authentication
-    # 'django.contrib.auth.backends.ModelBackend',  # Default backend for other scenarios
+    #'userapp.backends.EmailBackend',
+    'django.contrib.auth.backends.ModelBackend'  # Custom email-based authentication
 ]
-LOGIN_REDIRECT_URL = '/welcome'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/user/login/' 
+LOGOUT_REDIRECT_URL='/'
 
 AUTH_USER_MODEL = 'userapp.user'
 

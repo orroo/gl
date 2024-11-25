@@ -17,11 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path , include
 from .view import *
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',default_view, name='home'),
     path('welcome',welcome_view,name='welcome'),
+    path('check',my_view,name='check'),
+
     path('choix',choix_view, name='choix'),
     path('choix2',choix2_view, name='choix2'),
     path('',include('avisApp.urls')),
@@ -29,4 +33,7 @@ urlpatterns = [
     path('passager/',include('passagerapp.urls')),
     path('conducteur/',include('conducteurapp.urls')),
     path('catalogue/',include('Catalogue.urls')),
+    path('rides/', include('Rides.urls')),  # Match the exact app name
+    path('user/', include('userapp.urls')),  # Include user app URLs
+   
 ]
