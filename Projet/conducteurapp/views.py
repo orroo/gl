@@ -10,7 +10,7 @@ class conducteurcreateview(CreateView):
     model = conducteur
     template_name='conducteur/form.html'
     form_class=cform
-    success_url= reverse_lazy('conducteur_list')
+    success_url= reverse_lazy('welcome')
 
 
 class conducteurlistview(ListView): 
@@ -40,7 +40,7 @@ class conducteurupdateview(UpdateView):
     model = conducteur
     template_name='conducteur/form.html'
     form_class=cform
-    success_url= reverse_lazy('conducteur_list')
+    success_url= reverse_lazy('welcome')
 
 
 
@@ -50,7 +50,7 @@ class Deleteconducteur(DeleteView):
     
     model=conducteur
     template_name="conducteur/delete.html"
-    success_url=reverse_lazy('conducteur_list')
+    success_url=reverse_lazy('welcome')
 
 
 class searchconducteurlistview(ListView): 

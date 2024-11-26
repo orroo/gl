@@ -245,6 +245,11 @@ button.btn-danger:focus {
                             <p><strong>Date de Fin:</strong> {{ offre.end_date }}</p>
                             <p><strong>Prix:</strong> {{ offre.price }} Jetons</p>
                             <a href="{% url 'offre_detail' offre.id %}" class="btn btn-primary rounded-pill py-2 px-4 mt-3">Voir Détails</a>
+                            <!-- <a href="{#}" class="btn btn-primary rounded-pill py-2 px-4 mt-3">Acheter</a> -->
+                            <form id="buy-form" action="{% url 'buy_offre' offre.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary rounded-pill py-2 px-4 mt-3">Acheter pour {{ offre.price }} jetons</button>
+                            </form>
                         </div>
                     </div>
                     {% endfor %}

@@ -11,6 +11,13 @@ from django.urls import reverse_lazy ,reverse
 # Create your views here.
 from django.contrib.auth.views import LogoutView
 from django.contrib.auth import logout
+
+from django.contrib.auth.decorators import login_required
+
+
+def custom_404_view(request, exception):
+    return render(request, '404.html', status=404)
+
 class usercreateview(CreateView): 
     model = user
     template_name='user/form.html'
@@ -41,13 +48,27 @@ def detailsConf(request,ide):
     
     return render(request,"user/details.html",{"obj":user1})
 
+
+
+@login_required
+def profile_check(request):
+    if isinstance(request.user , conducteur):
+        user1= conducteur.objects.get(id=request.user.id)
+        return render(request,"conducteur/details.html",{"obj":user1})
+    elif isinstance(request.user , passager):
+        user1= passager.objects.get(id=request.user.id)
+        return render(request,"conducteur/details.html",{"obj":user1})
+    else :
+        user1= user.objects.get(id=request.user.id)
+        return render(request,"user/details.html",{"obj":user1})
+
     
 
 class userupdateview(UpdateView): 
     model = user
     template_name='user/form.html'
     form_class=upuserform
-    success_url= reverse_lazy('user_list')
+    success_url= reverse_lazy('welcome')
 
 
 
@@ -57,7 +78,7 @@ class Deleteuser(DeleteView):
     
     model=user
     template_name="user/delete.html"
-    success_url=reverse_lazy('user_list')
+    success_url=reverse_lazy('welcome')
 
 
 class searchuserlistview(ListView): 

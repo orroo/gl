@@ -10,7 +10,7 @@ class passagercreateview(CreateView):
     model = passager
     template_name='passager/form.html'
     form_class=pform
-    success_url= reverse_lazy('passager_list')
+    success_url= reverse_lazy('welcome')
 
 
 class passagerlistview(ListView): 
@@ -40,7 +40,7 @@ class passagerupdateview(UpdateView):
     model = passager
     template_name='passager/form.html'
     form_class=pform
-    success_url= reverse_lazy('passager_list')
+    success_url= reverse_lazy('welcome')
 
 
 
@@ -50,7 +50,7 @@ class Deletepassager(DeleteView):
     
     model=passager
     template_name="passager/delete.html"
-    success_url=reverse_lazy('passager_list')
+    success_url=reverse_lazy('welcome')
 
 
 class searchpassagerlistview(ListView): 

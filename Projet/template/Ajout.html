@@ -13,7 +13,7 @@
         </div>
         <!-- Header End -->
     <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
-        <h1 class="text-primary" style="font-family: 'Playfair Display', serif;">{{ form.instance.pk|default:"Ajouter" }} Avis</h1>
+        <h1 class="text-primary" style="font-family: 'Playfair Display', serif;"> Avis</h1>
     </div>
 
 <style>
@@ -29,7 +29,7 @@
 
 <div class="col-xl-6 wow fadeInUp centered-container" data-wow-delay="0.1s">
     <div class="bg-secondary p-5 rounded">
-        <h4 class="text-primary mb-4">{{ form.instance.pk|default:"Ajouter" }} Avis</h4>
+        
         <form method="post">
             {% csrf_token %}
             <div class="row g-4">
@@ -37,10 +37,10 @@
                 <div class="col-12">
                     <div class="form-floating">
                         <strong>Note</strong>
-                        {{ form.rating }} 
+                        {{ form.rating }}
                     </div>
                 </div>
-
+        
                 <!-- Comment Field -->
                 <div class="col-12">
                     <div class="form-floating">
@@ -48,7 +48,15 @@
                         {{ form.comment }}
                     </div>
                 </div>
-
+        
+                <!-- Ride Selection -->
+                <div class="col-12">
+                    <div class="form-floating">
+                        <strong>Select Ride</strong>
+                        {{ form.ride }}
+                    </div>
+                </div>
+        
                 <!-- Submit Button -->
                 <div class="col-12">
                     <button type="submit" class="btn btn-primary w-100 py-3">Enregistrer</button>

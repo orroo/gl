@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -68,7 +69,7 @@ AUTHENTICATION_BACKENDS = [
     #'userapp.backends.EmailBackend',
     'django.contrib.auth.backends.ModelBackend'  # Custom email-based authentication
 ]
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/welcome'
 LOGIN_URL = '/user/login/' 
 LOGOUT_REDIRECT_URL='/'
 

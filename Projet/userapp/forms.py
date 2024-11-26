@@ -1,5 +1,7 @@
 from django import forms
 from .models import *
+from conducteurapp.models import *
+from passagerapp.models import *
 from django.contrib.auth import authenticate,login
 from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
@@ -127,7 +129,7 @@ class uform (UserCreationForm):
 class upuserform(forms.ModelForm):
     class Meta:
         model = user
-        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','role','password']
+        fields = ['cin','nom','prenom','num_tel','adresse','date_naissance','username','role']
 
     date_naissance=forms.DateField(label="Date de naissance ",widget=forms.DateInput(attrs={'type' : 'date'}))
     def __init__(self, *args, **kwargs):
@@ -150,6 +152,7 @@ class loginform(forms.ModelForm):
 
 
 
+    mail=forms.CharField(label="mail",widget=forms.TextInput(attrs={'type' : 'text'}))
     password=forms.CharField(label="Password",widget=forms.PasswordInput(attrs={'type' : 'password'}))
     def __init__(self, *args, **kwargs):
         self.request = kwargs.pop('request', None)  # Capture request if passed
@@ -175,7 +178,7 @@ class loginform(forms.ModelForm):
         # Authenticate the user using Django's built-in authenticate function
         # user = authenticate(mail=email , password=password)
 
-        user =self.get_user()
+        user =self.get_userc()
         
         #EmailBackend.authenticate(self,self.request, username=email, password=password)
         if user is None:
@@ -185,24 +188,37 @@ class loginform(forms.ModelForm):
             login(self.request, user)
             return cleaned_data
         
-
     def get_user(self):
+        return self.request.user
+
+    def get_userc(self):
         email = self.cleaned_data.get('mail')
         password = self.cleaned_data.get('password')
         # Assuming you have a User model
         try:
+            
+            conducteur_user = conducteur.objects.get(mail=email)
+            if conducteur_user.check_password(password):
+                return conducteur_user
+
+            # Then check for the 'passager' model
+            passager_user = passager.objects.get(mail=email)
+            if passager_user.check_password(password):
+                return passager_user
+        
             userc = user.objects.get(mail=email)
             print(userc.password)
+            print(userc.check_password(password))
             if userc.check_password(password):
                 return userc
             else:
                 self.add_error('password','incorrect password')
-                return redirect('home')
+                return None
                 # raise ValidationError("mot de passe incorrect")
             # 
         except user.DoesNotExist:
             self.add_error('mail','incorrect mail')
-            return redirect('home')
+            return None
         
     
     

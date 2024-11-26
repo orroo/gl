@@ -17,6 +17,5 @@ urlpatterns = [
     path('list', OffreListView.as_view(), name='offre_list'),  # Display list of offers at /catalogue/
     path('details/<int:pk>/',OffreDetailView.as_view(), name='offre_detail'),  # Display details of a specific offer
     path('Offres',Offrelist.as_view(), name='offres_list'),
-    
-    
+    path('offre/<int:pk>/buy/', BuyOffreView.as_view(), name='buy_offre'),
 ]

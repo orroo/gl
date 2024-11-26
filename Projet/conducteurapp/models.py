@@ -32,4 +32,8 @@ class conducteur(user) :
     vehicule=models.CharField('description du vehicule', max_length=1000,validators=[validate_vehicule])
     note=models.FloatField('note' , default=0)
     num_permis=models.CharField('numero de permis' ,max_length=12, validators=[permis_validator])
+    def __str__(self):
+        return self.username + "(conducteur)"
+    def is_c(self):
+        return self.premium_since is not None
     

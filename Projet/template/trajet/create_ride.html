@@ -1,117 +1,125 @@
 {% include "../nav.html" %}
 {% load static %}
-    <style>
-        .error-message {
-            color: red;
-            font-size: 0.875rem;
-            margin-top: 5px;
-        }
+<style> 
+    textarea{
+        max-height: 100px;
+    }
+</style>
 
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
+<!-- Carousel Start -->
+<div class="header-carousel">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img src="{% static 'img/covoiturage.jpg' %}" class="img-fluid w-100" alt="First slide"/>
+                <div class="carousel-caption">
+                    <div class="container py-4">
+                        <div class="row g-5">
+                            <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="bg-secondary rounded p-5">
+                                    <h4 class="text-white mb-4">CREATE A RIDE</h4>
+                                    <!-- Create a form to bind with RideForm -->
+                                    <form method="POST" action="{% url 'create_ride' %}">
+                                        {% csrf_token %}
+                                        <div class="row g-3">
+                                            
+                                            <!-- Name Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-user"></span> <span class="ms-1">{{ form.name.label }}</span>
+                                                    </div>
+                                                    {{ form.name }}
+                                                </div>
+                                            </div>
 
-        .form-card {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+                                            <!-- Description Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-info-circle"></span> <span class="ms-1">{{ form.description.label }}</span>
+                                                    </div>
+                                                    {{ form.description }}
+                                                </div>
+                                            </div>
 
-        .form-card .form-label {
-            font-weight: bold;
-            color: #333;
-        }
+                                            <!-- Available Seats Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-chair"></span> <span class="ms-1">{{ form.available_seats.label }}</span>
+                                                    </div>
+                                                    {{ form.available_seats }}
+                                                </div>
+                                            </div>
 
-        .form-card .form-control {
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            padding: 10px;
-            font-size: 1rem;
-        }
+                                            <!-- Price Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-dollar-sign"></span> <span class="ms-1">{{ form.price.label }}</span>
+                                                    </div>
+                                                    {{ form.price }}
+                                                </div>
+                                            </div>
 
-        .form-card .form-control:focus {
-            border-color: #007bff;
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
-        }
+                                            <!-- Start Point Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">{{ form.start_point.label }}</span>
+                                                    </div>
+                                                    {{ form.start_point }}
+                                                </div>
+                                            </div>
 
-        .form-card textarea.form-control {
-            height: 150px; /* Reduced height for description field */
-            resize: vertical; /* Allow resizing only vertically */
-        }
+                                            <!-- Destination Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">{{ form.destination.label }}</span>
+                                                    </div>
+                                                    {{ form.destination }}
+                                                </div>
+                                            </div>
 
-        .form-card button {
-            width: 100%;
-            padding: 12px;
-            font-size: 1.1rem;
-            border-radius: 8px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-        }
+                                            <!-- Departure Time Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">{{ form.departure_time.label }}</span>
+                                                    </div>
+                                                    {{ form.departure_time }}
+                                                </div>
+                                            </div>
 
-        .form-card button:hover {
-            background-color: #0056b3;
-        }
+                                            <!-- Recurring Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-repeat"></span><span class="ms-1">{{ form.is_recurring.label }}</span>
+                                                    </div>
+                                                    {{ form.is_recurring }}
+                                                </div>
+                                            </div>
 
-        .button-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .button-container a {
-            text-decoration: none;
-            color: #007bff;
-        }
-    </style>
-
-    <!-- Header Start -->
-    <div class="container-fluid bg-breadcrumb">
-        <div class="container text-center py-5" style="max-width: 900px;">
-            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Create a New Ride</h4>
-            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Pages</a></li>
-                <li class="breadcrumb-item active text-primary">Create Ride</li>
-            </ol>
-        </div>
-    </div>
-    <!-- Header End -->
-
-    <!-- Form Start -->
-    <div class="container my-5">
-        <div class="form-container">
-            <div class="form-card">
-                <h2 class="mb-4 text-center">Create a New Ride</h2>
-                <form method="post">
-                    {% csrf_token %}
-                    {% for field in form %}
-                        <div class="mb-3">
-                            <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
-                            {{ field }}
-                            {% if field.help_text %}
-                                <small class="form-text text-muted">{{ field.help_text }}</small>
-                            {% endif %}
-                            {% if field.errors %}
-                                <div class="error-message">
-                                    {% for error in field.errors %}
-                                        <p>{{ error }}</p>
-                                    {% endfor %}
+                                            <!-- Submit Button -->
+                                            <div class="col-12">
+                                                <button class="btn btn-light w-100 py-2" type="submit">Create Ride</button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                            {% endif %}
+                            </div>
                         </div>
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Create Ride</button>
-                </form>
-            </div>
-            <div class="button-container">
-                <a href="{% url 'ride_list' %}" class="btn btn-secondary mt-3">Back to Ride List</a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <!-- Form End -->
-
-
-{% include "../footer.html" %}
-
+</div>
+<!-- Carousel End -->

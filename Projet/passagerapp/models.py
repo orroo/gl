@@ -4,3 +4,5 @@ from userapp.models import *
 
 class passager(user) :
     nb_jetons=models.IntegerField('nombre de jetons',default=0)
+    def __str__(self):
+        return self.username + "(passager)"

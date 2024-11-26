@@ -69,7 +69,7 @@
         <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="{% url 'home' %}"  class="navbar-brand p-0">
+                    <a href="{% url 'welcome' %}"  class="navbar-brand p-0">
                         <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>FiThnity</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -78,8 +78,9 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         <div class="navbar-nav mx-auto py-0">
-                            <a href="{% url 'home' %}"  class="nav-item nav-link">Home</a>
-                            <a href="" class="nav-item nav-link">Ride</a>
+                            <a href="{% url 'welcome' %}"  class="nav-item nav-link">Home</a>
+                            <a href="{% url 'create_ride' %}" class="nav-item nav-link">Ride</a>
+                            <a href="{% url 'ride_list' %}" class="nav-item nav-link">Book</a>
             
                 
                             <a href="{% url 'offre_list' %}" class="nav-item nav-link">Catalog</a>
@@ -89,9 +90,9 @@
                             <div class="nav-item dropdown">
                                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">User</a>
                                 <div class="dropdown-menu m-0">
-                                    <a href="feature.html" class="dropdown-item">Info</a>
+                                    <a href="{% url 'profile' %}" class="dropdown-item">Info</a>
                                     <a href="cars.html" class="dropdown-item">Notifications</a>
-                                    <a href="team.html" class="dropdown-item">Réservation</a>
+                                    <a href="{% url 'my_reservations' %}" class="dropdown-item">Réservation</a>
 
                                 </div>
                             </div>

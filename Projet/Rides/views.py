@@ -133,7 +133,7 @@ def create_ride(request):
             ride = form.save(commit=False)  # Do not save to the database yet
             ride.owner = request.user       # Set the owner to the logged-in user
             ride.save()                     # Now save to the database
-            return redirect('/rides/')      # Redirect to the rides list page after saving
+            return redirect('/welcome')      # Redirect to the rides list page after saving
             print("YESSSSSS")
         else:
             return render(request, 'trajet/create_ride.html', {'form': form})  # Re-render the form with errors
