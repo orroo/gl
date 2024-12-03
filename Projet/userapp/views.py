@@ -52,12 +52,12 @@ def detailsConf(request,ide):
 
 @login_required
 def profile_check(request):
-    if isinstance(request.user , conducteur):
+    if request.user.role== "conducteur":
         user1= conducteur.objects.get(id=request.user.id)
         return render(request,"conducteur/details.html",{"obj":user1})
-    elif isinstance(request.user , passager):
+    elif request.user.role== "passager":
         user1= passager.objects.get(id=request.user.id)
-        return render(request,"conducteur/details.html",{"obj":user1})
+        return render(request,"passager/details.html",{"obj":user1})
     else :
         user1= user.objects.get(id=request.user.id)
         return render(request,"user/details.html",{"obj":user1})

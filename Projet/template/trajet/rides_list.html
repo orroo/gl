@@ -51,7 +51,7 @@
         {% for ride in page_obj %}
             <div class="col">
                 <div class="card h-100">
-                    <img src="{{ ride.image }}" class="card-img-top" alt="Ride Image">
+                    <img src="{% static 'img/covoiturage.jpeg'%}" class="card-img-top" alt="Ride Image">
                     <div class="card-body">
                         <h5 class="card-title">{{ ride.start_point }} to {{ ride.destination }}</h5>
                         <p class="card-text">Price: {{ ride.price }} DT</p>
@@ -82,5 +82,6 @@
         {% endif %}
     </div>
 </div>
+<div style="height: 100px;"></div>
 
 {% include "../footer.html" %}
