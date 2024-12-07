@@ -13,10 +13,11 @@ from .backends import EmailBackend
 class uform (UserCreationForm):
     class Meta:
         model = user
-        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','role','password1','password2']
+        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','role','password1','password2' ,'photo' ]
 
     
     date_naissance=forms.DateField(label="Date de naissanace",widget=forms.DateInput(attrs={'type' : 'date'}))
+    photo=forms.FileField(label="photo de profil",widget=forms.FileInput(attrs={'type' : 'file'}))
     def __init__(self, *args, **kwargs):
         super(uform, self).__init__(*args, **kwargs)
         for key, value in self.fields.items():
@@ -129,9 +130,11 @@ class uform (UserCreationForm):
 class upuserform(forms.ModelForm):
     class Meta:
         model = user
-        fields = ['cin','nom','prenom','num_tel','adresse','date_naissance','username','role']
+        fields = ['cin','nom','prenom','num_tel','adresse','date_naissance','username','role','photo']
 
     date_naissance=forms.DateField(label="Date de naissance ",widget=forms.DateInput(attrs={'type' : 'date'}))
+    
+    photo=forms.FileField(label="photo de profil",widget=forms.FileInput(attrs={'type' : 'file'}))
     def __init__(self, *args, **kwargs):
         super(upuserform, self).__init__(*args, **kwargs)
         for key, value in self.fields.items():
@@ -195,30 +198,33 @@ class loginform(forms.ModelForm):
         email = self.cleaned_data.get('mail')
         password = self.cleaned_data.get('password')
         # Assuming you have a User model
-        try:
-            
+        
+        try :
             conducteur_user = conducteur.objects.get(mail=email)
             if conducteur_user.check_password(password):
                 return conducteur_user
-
+        except conducteur.DoesNotExist:
+            try :
             # Then check for the 'passager' model
-            passager_user = passager.objects.get(mail=email)
-            if passager_user.check_password(password):
-                return passager_user
+                passager_user = passager.objects.get(mail=email)
+                if passager_user.check_password(password):
+                    return passager_user
+            except passager.DoesNotExist:
+                try:
+                    userc = user.objects.get(mail=email)
+                    print(userc.password)
+                    print(userc.check_password(password))
+                    if userc.check_password(password):
+                        return userc
+                except user.DoesNotExist:
+                    self.add_error('mail','incorrect mail')
+                    return None
         
-            userc = user.objects.get(mail=email)
-            print(userc.password)
-            print(userc.check_password(password))
-            if userc.check_password(password):
-                return userc
-            else:
-                self.add_error('password','incorrect password')
-                return None
-                # raise ValidationError("mot de passe incorrect")
-            # 
-        except user.DoesNotExist:
-            self.add_error('mail','incorrect mail')
-            return None
+        self.add_error('password','incorrect password')
+        return None
+        # raise ValidationError("mot de passe incorrect")
+        # 
+        
         
     
     

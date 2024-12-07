@@ -25,6 +25,10 @@
        
         <li>
             <div class="p-5 bg-light rounded">
+                
+                <img src="/{{ obj.photo }}" alt="" class="pfp">
+            </div>
+            <div class="p-5 bg-light rounded">
                 <div class="bg-white rounded p-4 mb-4">
                     <!-- Display who posted and who received the avis -->
                     
@@ -42,6 +46,7 @@
                     <p><strong>vehicule : </strong>{{ obj.vehicule }}</p>
                     <p><strong>Numero de permis : </strong>{{ obj.num_permis }}</p>
                     <p><strong>note : </strong>{{ obj.note }}</p>
+                   
                     
 
                     <!-- Approve and Disapprove Buttons -->

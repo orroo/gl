@@ -10,7 +10,7 @@ class conducteurcreateview(CreateView):
     model = conducteur
     template_name='conducteur/form.html'
     form_class=cform
-    success_url= reverse_lazy('welcome')
+    success_url= reverse_lazy('user_login')
 
 
 class conducteurlistview(ListView): 
@@ -39,8 +39,8 @@ def detailsConf(request,ide):
 class conducteurupdateview(UpdateView): 
     model = conducteur
     template_name='conducteur/form.html'
-    form_class=cform
-    success_url= reverse_lazy('welcome')
+    form_class=upcform
+    success_url= reverse_lazy('profile')
 
 
 

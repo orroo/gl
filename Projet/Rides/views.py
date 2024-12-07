@@ -78,6 +78,7 @@ def ride_detail(request, pk):
 
 
 
+@login_required
 def reserve_ride(request, pk):
     # Get the ride instance
     ride = get_object_or_404(Ride, pk=pk)
@@ -127,19 +128,23 @@ def cancel_reservation(request, pk):
 
 @login_required
 def create_ride(request):
-    if request.method == 'POST':
-        form = RideForm(request.POST)
-        if form.is_valid():
-            ride = form.save(commit=False)  # Do not save to the database yet
-            ride.owner = request.user       # Set the owner to the logged-in user
-            ride.save()                     # Now save to the database
-            return redirect('/welcome')      # Redirect to the rides list page after saving
-            print("YESSSSSS")
+    
+    if (request.user.role =="conducteur"):
+        if request.method == 'POST':
+            form = RideForm(request.POST)
+            if form.is_valid():
+                ride = form.save(commit=False)  # Do not save to the database yet
+                ride.owner = request.user       # Set the owner to the logged-in user
+                ride.save()                     # Now save to the database
+                return redirect('/welcome')      # Redirect to the rides list page after saving
+                print("YESSSSSS")
+            else:
+                return render(request, 'trajet/create_ride.html', {'form': form})  # Re-render the form with errors
         else:
-            return render(request, 'trajet/create_ride.html', {'form': form})  # Re-render the form with errors
-    else:
-        form = RideForm()
-    return render(request, 'trajet/create_ride.html', {'form': form})
+            form = RideForm()
+        return render(request, 'trajet/create_ride.html', {'form': form})
+    else : 
+        return render(request, 'not_allowed.html', {'error': "can't create rides without being a conductor"})
 
 
 

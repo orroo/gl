@@ -1,7 +1,7 @@
 from django.db import models
 import re
 from django.contrib.auth.models import AbstractUser
-from django.core.validators import ValidationError , RegexValidator
+from django.core.validators import ValidationError , RegexValidator , FileExtensionValidator
 # Create your models here.
 from django.contrib.auth.hashers import make_password , check_password
 
@@ -34,6 +34,8 @@ class user (AbstractUser):
     date_naissance=models.DateField(('date de naissance'),null=True,blank=True)
     username= models.CharField(('username') , max_length=150,unique=True)
     role= models.CharField(('role') , max_length=150)
+    photo = models.FileField(upload_to="static/img/users/" , validators=[FileExtensionValidator(allowed_extensions=['png','jpg'] , message="only png and jpg files allowed")],default='test.jpg')
+    # photo = models
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['mail']

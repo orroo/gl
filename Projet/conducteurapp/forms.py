@@ -8,10 +8,11 @@ from django.contrib.auth.forms import UserCreationForm
 class cform (UserCreationForm):
     class Meta:
         model = conducteur
-        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','role','assurance','vehicule','num_permis','password1','password2']
+        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','photo','role','assurance','vehicule','num_permis','password1','password2']
         
 
     date_naissance=forms.DateField(label="Date de naissanace",widget=forms.DateInput(attrs={'type' : 'date'}))
+    photo=forms.FileField(label="photo de profil",widget=forms.FileInput(attrs={'type' : 'file'}))
     
     role=forms.CharField(widget=forms.TextInput(attrs={'readonly' :True,  'value' : 'conducteur'}))
     
@@ -53,6 +54,47 @@ class cform (UserCreationForm):
         if user.objects.filter(username=username).exists():
             raise forms.ValidationError("Le nom d'utilisateur est déjà pris.")
         return username
+
+
+
+class upcform (forms.ModelForm):
+    class Meta:
+        model = conducteur
+        fields = ['cin','nom','prenom','num_tel','adresse','mail','date_naissance','username','photo','role','assurance','vehicule','num_permis']
+        
+
+    date_naissance=forms.DateField(label="Date de naissanace",widget=forms.DateInput(attrs={'type' : 'date'}))
+    photo=forms.FileField(label="photo de profil",widget=forms.FileInput(attrs={'type' : 'file'}))
+    
+    role=forms.CharField(widget=forms.TextInput(attrs={'readonly' :True,  'value' : 'conducteur'}))
+    
+    def __init__(self, *args, **kwargs):
+        super(upcform, self).__init__(*args, **kwargs)
+        for key, value in self.fields.items():
+            value.widget.attrs['class'] = 'form-control'
+
+
+    def clean_cin(self):
+        cin = self.cleaned_data.get('cin')
+        if len(cin) < 8:
+            raise forms.ValidationError("Le cin doit contenir au moins 8 caractères.")
+        return cin
+    
+
+    def clean_num_tel(self):
+        num_tel = self.cleaned_data.get('num_tel')
+        if len(num_tel) < 8:
+            raise forms.ValidationError("Le numero de telephone doit contenir au moins 8 chiffres.")
+        return num_tel
+    
+
+    def clean_username(self):
+        username = self.cleaned_data.get('username')
+        if user.objects.filter(username=username).exists():
+            raise forms.ValidationError("Le nom d'utilisateur est déjà pris.")
+        return username
+    
+    
 
 class conducteurform(forms.ModelForm):
     class Meta:

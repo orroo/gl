@@ -10,7 +10,7 @@ class passagercreateview(CreateView):
     model = passager
     template_name='passager/form.html'
     form_class=pform
-    success_url= reverse_lazy('welcome')
+    success_url= reverse_lazy('user_login')
 
 
 class passagerlistview(ListView): 
@@ -39,8 +39,8 @@ def detailsConf(request,ide):
 class passagerupdateview(UpdateView): 
     model = passager
     template_name='passager/form.html'
-    form_class=pform
-    success_url= reverse_lazy('welcome')
+    form_class=uppform
+    success_url= reverse_lazy('profile')
 
 
 

@@ -6,7 +6,7 @@ from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('', views.ride_list, name='ride_list'),  # List of all rides
     path('create/', views.create_ride, name='create_ride'),  # Ride creation page
-    path('user/login/', auth_views.LoginView.as_view(), name='user_login'),  # Login page
+    # path('user/login/', auth_views.LoginView.as_view(), name='user_login'),  # Login page
     path('edit/<int:pk>/', views.edit_ride, name='edit_ride'),  # Access via /rides/edit/<pk>/
     path('delete/<int:pk>/', views.delete_ride, name='delete_ride'),  # Access via /rides/delete/<pk>/
     path('<int:pk>/', views.ride_detail, name='ride_detail'),
