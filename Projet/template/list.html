@@ -30,7 +30,8 @@
                 </div>
                 <!-- Make the testimonial-inner clickable using JavaScript -->
                 <div class="testimonial-inner p-4" data-id="{{ avis.pk }}" onclick="window.location.href='/update/' + this.dataset.id;">
-                    <img src="../static/img/user.jpg" class="img-fluid" alt="User image">
+                    <img src="{{ avis.author.photo.url }}" class="img-fluid" alt="{{ avis.author.username }}">
+
                     <div class="ms-4">
                         <h4>{{ avis.author.username }}</h4>
                         <h6>To: <strong>{{ avis.recipient.name }}</strong></h6>

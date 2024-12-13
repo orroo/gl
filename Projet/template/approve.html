@@ -41,7 +41,9 @@
                 <div class="row gx-0 align-items-center" style="height: 45px;">
                     <div class="col-lg-6 text-center text-lg-start mb-lg-0">
                         <div class="d-flex flex-wrap">
-                            <a href="#" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Admin</a>
+                            <a href="approve.html" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Approving</a>
+                            <a href="{% url 'stat_avis' %}" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Statistics</a>
+                            
 
                         </div>
                     </div>
@@ -73,49 +75,87 @@
             </div>
             
             <ul>
-                {% for avis in avis %}
-                    <li>
-                        <div class="p-5 bg-light rounded">
-                            <div class="bg-white rounded p-4 mb-4">
-                                <!-- Display who posted and who received the avis -->
-                                <p>
-                                    <strong>{{ avis.author.username }}</strong>
-                                    left a review for: 
-                                    <strong>{{ avis.recipient.name }}</strong>:
-                                </p>
-            
-                                <!-- Display rating with colors -->
-                                <strong class="mb-0 me-2"
-                                    style="color:
-                                        {% if avis.rating == 1 %}
-                                            darkred;
-                                        {% elif avis.rating == 2 %}
-                                            lightcoral;
-                                        {% elif avis.rating == 3 %}
-                                            orange;
-                                        {% elif avis.rating == 4 %}
-                                            darkgreen;
-                                        {% else %}
-                                            black;  /* Default color for unexpected cases */
-                                        {% endif %};
-                                    ">
-                                    {{ avis.rating }} Stars
+                {% for review_item in reviews_with_analysis %}
+                <li>
+                    <div class="p-5 bg-light rounded shadow-sm">
+                        <div class="bg-white rounded p-4 mb-4 border">
+                            <!-- Display who posted and who received the review -->
+                            <p>
+                                <strong style="color: #1a2540; font-size: 1.1em;">
+                                    {{ review_item.avis.author.username }}
                                 </strong>
+                                <span style="color: #555;">left a review for</span>
+                                <strong style="color: #ff0000; font-size: 1.1em;">
+                                    {{ review_item.avis.recipient.name }}
+                                </strong>:
+                            </p>
             
-                                <!-- Highlight bad words -->
-                                <span>
-                                    {% for word in bad_words %}
-                                        {% if word in avis.comment %}
-                                            <span style="color:red; font-weight: bold;">|{{ word }}|</span>
-                                        {% endif %}
+                            <!-- Display rating with real stars -->
+                            <p class="mb-2">
+                                <span style="font-size: 1.2em; color: 
+                                    {% if review_item.avis.rating == 1 %} darkred;
+                                    {% elif review_item.avis.rating == 2 %} lightcoral;
+                                    {% elif review_item.avis.rating == 3 %} orange;
+                                    {% elif review_item.avis.rating == 4 %} darkgreen;
+                                    {% else %} black; {% endif %}
+                                ">
+                                    {% for i in "12345"|slice:":review_item.avis.rating" %}
+                                        ⭐
                                     {% endfor %}
-                                    :{{ avis.comment }}
-                                </span> ({{ avis.date }})
+                                </span>
+                                <span style="color: #888;">({{ review_item.avis.rating }} Stars)</span>
+                            </p>
             
+                            <!-- Highlight bad words in the comment -->
+                            <p>
+                                {% for word in bad_words %}
+                                    {% if word in review_item.avis.comment %}
+                                        <span style="color:red; font-weight: bold;">|{{ word }}|</span>
+                                    {% endif %}
+                                {% endfor %}
+                                <span style="font-size: 1em; font-style: italic; color: #333;">
+                                    {{ review_item.avis.comment }}
+                                </span>
+                            </p>
+            
+                            <!-- Display the review date -->
+                            <p style="color: #666; font-size: 0.9em;">
+                                <em>Reviewed on {{ review_item.avis.date }}</em>
+                            </p>
+                                
+                                <!-- Display Violence & Emotion Analysis -->
+
+                                 <p>
+                                    <strong style="color: #ff0000; font-size: 1.2em; font-family: Arial, sans-serif;">
+                                        🔍 Violence Analysis:
+                                    </strong> 
+                                    <span style="font-size: 1.1em; font-style: italic; color: #333;">
+                                        {{ review_item.analysis }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong style="color: #1a2540; font-size: 1.2em; font-family: Arial, sans-serif;">
+                                        😊 Emotion Analysis:
+                                    </strong> 
+                                    <span style="font-size: 1.1em; font-style: italic; color: #333;">
+                                        {{ review_item.emotions }}
+                                    </span>
+                                </p>
+                                
+                                
+                                
                                 <!-- Approve and Disapprove Buttons -->
                                 <div class="mt-3">
-                                    <a href="{% url 'approve_avis' avis.pk %}" class="btn btn-success rounded py-3 px-5">Approve</a>
-                                    <a href="{% url 'disapprove_avis' avis.pk %}" class="btn btn-warning rounded py-3 px-5">Disapprove</a>
+                                    <a href="{% url 'approve_avis' review_item.avis.pk %}" 
+                                    class="btn rounded py-3 px-5" 
+                                    style="background-color: #1a2540; color: white; border: none;" 
+                                    onmouseover="this.style.backgroundColor='#ff0000';" 
+                                    onmouseout="this.style.backgroundColor='#1a2540';">
+                                    Approve
+                                 </a>
+                                 
+
+                                    <a href="{% url 'disapprove_avis' review_item.avis.pk %}" class="btn btn-primary rounded py-3 px-5">Disapprove</a>
                                 </div>
                             </div>
                         </div>
@@ -124,17 +164,15 @@
                     <h4>No Reviews to Approve for the moment.</h4>
                 {% endfor %}
             </ul>
-            
-            
-            
-                
-            
+        
             <div style="display: flex; justify-content: center; width: 100%; padding-top: 50px; gap: 20px;">
                 <a href="?sort_by=rating_desc" class="btn btn-primary rounded py-3 px-5">Filter(Descending)</a>
+                <a href="{% url 'stat_avis' %}" class="btn btn-primary rounded py-3 px-5">
+                  Statistics
+                </a>
             </div>
-            
-            
         </body>
+        
         </html>
         
 

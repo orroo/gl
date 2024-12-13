@@ -15,6 +15,7 @@ class Avis(models.Model):
     author = models.ForeignKey(user, related_name='given_reviews', on_delete=models.CASCADE)  # Reviewer
     recipient = models.ForeignKey(Ride, related_name='received_reviews', on_delete=models.CASCADE)  # Link to the Ride model (reviewed ride)
     ride = models.ForeignKey(Ride, related_name='reviews', on_delete=models.CASCADE, null=True, blank=True)  # Link to Ride
+    bad_comment_detected = models.BooleanField(default=False)
 
     def __str__(self):
         return f'{self.rating} Etoiles by {self.author} for {self.recipient}'

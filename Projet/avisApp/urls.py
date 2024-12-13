@@ -13,4 +13,5 @@ urlpatterns = [
     path('approve/<int:pk>/', views.approve_avis, name='approve_avis'),  # Approve individual avis
     path('avis/', views.avis_list, name='avis_list'),  
     path('disapprove/<int:pk>/', views.disapprove_avis, name='disapprove_avis'),
+    path('stat/', views.calculate_satisfaction_percentage, name='stat_avis'),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

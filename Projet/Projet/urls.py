@@ -34,6 +34,7 @@ urlpatterns = [
     path('conducteur/',include('conducteurapp.urls')),
     path('catalogue/',include('Catalogue.urls')),
     path('rides/', include('Rides.urls')),  # Match the exact app name
-    path('user/', include('userapp.urls')),  # Include user app URLs
+    path('user/', include('userapp.urls')), 
+    path('stat/', include('avisApp.urls')), # Include user app URLs
    
 ]
