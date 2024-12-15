@@ -77,15 +77,33 @@
                                         <div class="bg-secondary rounded p-5">
                                             <h4 class="text-white mb-4">On to the journey</h4>
                                             <form method="post">
-                                                {% csrf_token %}
-                                                {{ form.as_p }}
-                                                <button  class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                                                {% csrf_token %}  
+                                                {{ form.password1.label_tag }}
+                                                {{ form.password1 }}
+                                                {% if form.password1.errors %}
+                                                    <div>
+                                                        {% for error in form.password1.errors %}
+                                                            <p>{{ error }}</p>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+
+                                                {{ form.password2.label_tag }}
+                                                {{ form.password2 }}
+                                                {% if form.password2.errors %}
+                                                    <div>
+                                                        {% for error in form.password2.errors %}
+                                                            <p>{{ error }}</p>
+                                                        {% endfor %}
+                                                    </div>
+                                                {% endif %}
+                                               
+
+                                                <button  class="btn btn-primary w-100 py-2" style="margin-top: 10 px;" type="submit">reset password</button>
                                             
-                                                <!-- Hidden field to pass the 'next' parameter for redirection -->
-                                                <input type="hidden" name="next" value="{{ next }}">
                                             </form>
                                         </div>
-                                        <a href="{% url 'mailing' %}">forgot password </a>
+                                        
                                     </div>
                                 </div>
                             </div>

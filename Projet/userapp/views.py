@@ -1,4 +1,4 @@
-from django.shortcuts import render ,redirect
+from django.shortcuts import render ,redirect,get_object_or_404
 
 from.models import *
 from passagerapp.models import *
@@ -13,6 +13,12 @@ from django.contrib.auth.views import LogoutView
 from django.contrib.auth import logout
 
 from django.contrib.auth.decorators import login_required
+
+
+from django.core.mail import send_mail
+
+import secrets
+import string 
 
 
 def custom_404_view(request, exception):
@@ -42,6 +48,9 @@ class userlistview(ListView):
 #     context_object_name="obj"
 
 
+
+
+
 def detailsConf(request,ide):
     
     user1= user.objects.get(id=ide)
@@ -62,7 +71,114 @@ def profile_check(request):
         user1= user.objects.get(id=request.user.id)
         return render(request,"user/details.html",{"obj":user1})
 
+from django.contrib.auth.hashers import make_password
+def reset_password(request):
+    input_mail = request.GET.get('mail')  # Get the email from the query parameter
+    form = resetform()  # Initialize the form (outside the POST block to prevent re-initialization)
     
+    if request.method == 'POST':
+        form = resetform(request.POST)  # Create a form instance with POST data
+        print('post')
+        if form.is_valid():
+            print("valid")
+            try:
+                # Get the user by email
+                userup = user.objects.get(mail=input_mail)
+                userup.password = make_password(form.cleaned_data['password1'])  # Hash the new password
+                userup.save()  # Save the updated user
+                return redirect('user_login')  # Redirect to login page
+
+            except user.DoesNotExist:
+                # If no user is found with that email, return to the form with the same email and no errors
+                print('user error')
+                return render(request, "reset.html", {"form": form})
+            
+    print('method')
+
+    # If method is GET or form is invalid, re-render the form
+    return render(request, "reset.html", {"form": form})
+# def reset_password(request):
+#     input_mail = request.GET.get ('mail')
+#     if request.method =='POST':
+#         form = resetform(request.POST)
+#         if form.is_valid() :
+#             mail = request.POST.get('MAIL')
+#             try : 
+#                 userup =user.objects.get(mail=mail)
+#                 userup.password = make_password(request.POST.get('password1'))
+#                 userup.save()
+#                 return redirect('user_login') 
+#             except : 
+#                 form = resetform()
+#                 return render(request,"reset.html",{"form":form,"mail":input_mail})
+
+#     else :
+#         form = resetform()
+#     return render(request,"reset.html",{"form":form,"mail":input_mail})
+
+
+
+def generate_alphanumeric_code(length=6):
+    characters = string.ascii_letters + string.digits  # A-Z, a-z, 0-9
+    return ''.join(secrets.choice(characters) for _ in range(length))
+
+def mail_code(request):
+    input_mail = request.GET.get ('mail')
+    code = generate_alphanumeric_code()
+    send_mail(
+        subject="Subject here",
+        message= "Here is your code : "+code,
+        from_email="omarriahi2003@gmail.com",
+        recipient_list=["orro5aryasora@gmail.com",input_mail],
+        fail_silently=False,
+    )
+    return render(request,"code_check.html",{"vcode":code,"mail":input_mail})
+
+
+def mailing(request):
+    if request.method == 'POST':
+        input_mail = request.POST.get ('MAIL')
+        print(input_mail)
+        # userc=get_object_or_404(user, mail=input_mail)
+        # try :
+        userc=user.objects.get(mail=input_mail)
+        if userc is not None :
+            url = reverse('mailcode')  # Reverse the URL name
+            url_with_query = f"{url}?mail="+input_mail  # Add the query string
+            return redirect(url_with_query)
+                # code = generate_alphanumeric_code()
+                # send_mail(
+                #     subject="Subject here",
+                #     message= "Here is your code : "+code,
+                #     from_email="omarriahi2003@gmail.com",
+                #     recipient_list=[input_mail],
+                #     fail_silently=False,
+                # )
+                # return render(request,"code_check.html",{"vcode":code})
+        # except :
+            # return render(request,"mail_check.html",{"error":"mail doesn t exist"})
+    return render(request,"mail_check.html")
+
+
+
+
+
+
+# def login_view(request):
+#     if request.method == 'POST':
+#         form = loginform(request.POST)
+#         mail=form.cleaned_data.get('mail')
+#         pwd=form.cleaned_data.get('password')
+#         userc=user.objects.get(mail=mail)
+#         if userc is not None :
+#             if u:
+#                 # Proceed with successful login actions
+#                 return redirect('home')  # Redirect to the homepage or another page
+#     else:
+#         form = loginform()
+
+#     return render(request, 'login.html', {'form': form})
+
 
 class userupdateview(UpdateView): 
     model = user

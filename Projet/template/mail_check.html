@@ -78,14 +78,13 @@
                                             <h4 class="text-white mb-4">On to the journey</h4>
                                             <form method="post">
                                                 {% csrf_token %}
-                                                {{ form.as_p }}
-                                                <button  class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                                                <input class=" form-control" name="MAIL" type="text"  placeholder="your mail">
+                                                <a >{{error}}</a>
+                                                <button  class="btn btn-primary w-100 py-2" style="margin-top: 10 px;" >send mail</button>
                                             
-                                                <!-- Hidden field to pass the 'next' parameter for redirection -->
-                                                <input type="hidden" name="next" value="{{ next }}">
                                             </form>
                                         </div>
-                                        <a href="{% url 'mailing' %}">forgot password </a>
+                                        
                                     </div>
                                 </div>
                             </div>

@@ -6,7 +6,7 @@ from django.core.validators import ValidationError , RegexValidator , FileExtens
 from django.contrib.auth.hashers import make_password , check_password
 
 def email_validator(value):
-    if( not value.endswith("@esprit.tn")) :
+    if( not value.endswith("@esprit.tn")) and ( not value.endswith("@gmail.com")) :
         raise ValidationError("invalid email")
 
 

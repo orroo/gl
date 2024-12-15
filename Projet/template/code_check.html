@@ -76,16 +76,16 @@
                                     <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                         <div class="bg-secondary rounded p-5">
                                             <h4 class="text-white mb-4">On to the journey</h4>
-                                            <form method="post">
-                                                {% csrf_token %}
-                                                {{ form.as_p }}
-                                                <button  class="btn btn-primary w-100 py-2" type="submit">Login</button>
                                             
-                                                <!-- Hidden field to pass the 'next' parameter for redirection -->
-                                                <input type="hidden" name="next" value="{{ next }}">
-                                            </form>
+                                                {% csrf_token %}
+                                                <input class=" form-control" type="text" id='code' placeholder="number in mail">
+                                                <a id="error"></a>
+                                                <input class=" form-control" type="hidden" id="check" value="{{ vcode }}">
+                                                <input class=" form-control" type="hidden" id="mail" value="{{ mail }}">
+                                                <button  class="btn btn-primary w-100 py-2" style="margin-top: 10 px;" onclick="check()">check</button>
+                                            
                                         </div>
-                                        <a href="{% url 'mailing' %}">forgot password </a>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -94,6 +94,28 @@
                 </div>
             </div>      
         </div>
+        <script>
+            var code_input =document.getElementById('code');
+            var code_check =document.getElementById('check');
+            var mail =document.getElementById('mail');
+            
+            const check =()=>{
+               
+                if (code_input.value == code_check.value )
+                {
+                    url = '/user/reset'
+                    url_with_query = url+"?mail="+mail.value
+                    window.location.href = url_with_query
+                }
+                else
+                {
+                    document.getElementById('error').innerHTML = "code doesn't match "
+                }
+            }
+            
+        </script>
+
+
         
         
     <!-- JavaScript Libraries -->
