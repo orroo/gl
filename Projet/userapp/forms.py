@@ -3,11 +3,12 @@ from .models import *
 from conducteurapp.models import *
 from passagerapp.models import *
 from django.contrib.auth import authenticate,login
-from django.contrib.auth.forms import UserCreationForm , UserChangeForm
+from django.contrib.auth.forms import UserCreationForm
 from django.core.exceptions import ValidationError
 
 from django.shortcuts import redirect
 from .backends import EmailBackend
+
 
 
 
@@ -43,7 +44,7 @@ class uform (UserCreationForm):
 
 
     def clean_password(self):
-        password = self.cleaned_data.get('password1')
+        password = self.cleaned_data.get('password')
         if len(password) < 8:
             raise forms.ValidationError("Le mot de passe doit contenir au moins 8 caractères.")
         return password

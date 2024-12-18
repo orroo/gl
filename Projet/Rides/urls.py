@@ -16,6 +16,7 @@ urlpatterns = [
     path('cancel/<int:pk>/', views.cancel_reservation, name='cancel_reservation'),  # New cancel reservation URL
     
     path('my_rides/', views.my_rides, name='my_rides'),
+    path('recommended-rides/', views.recommend_rides, name='recommended_rides'),
     
 
 

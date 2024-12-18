@@ -47,7 +47,7 @@
         <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
+                    <a href="{% url 'home' %}" class="navbar-brand p-0">
                         <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Fithnity</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -57,7 +57,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         
                         </div>
-                        <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                        <a href="{% url 'choix2' %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
                     </div>
                 </nav>
             </div>
@@ -75,7 +75,7 @@
                                 <div class="row g-5 justify-content-center align-items-center" style="height: 100vh;">
                                     <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
                                         <div class="bg-secondary rounded p-5">
-                                            <h4 class="text-white mb-4">On to the journey</h4>
+                                            <h4 class="text-white mb-4">Enter Your Mail </h4>
                                             <form method="post">
                                                 {% csrf_token %}
                                                 <input class=" form-control" name="MAIL" type="text"  placeholder="your mail">

@@ -190,3 +190,32 @@ def my_rides(request):
     user_rides = Ride.objects.filter(owner=user)
     
     return render(request, 'trajet/my_rides.html', {'user_rides': user_rides})
+
+
+
+
+
+@login_required
+def recommend_rides(request):
+    # Vérifier si l'utilisateur est connecté
+    if request.user.is_authenticated:
+        user = request.user
+        
+        # Récupérer l'adresse de l'utilisateur depuis l'app 'user'
+        user_address = user.adresse.strip().lower()  # Nettoyer l'adresse de l'utilisateur
+        
+        # Liste des mots clés à rechercher dans le point de départ
+        keywords = ['ennaser', 'manzah', 'ariana']
+        
+        # Créer une requête Q pour rechercher les trajets dont le point de départ contient un des mots-clés
+        query = Q()
+        for keyword in keywords:
+            query |= Q(start_point__icontains=keyword)  # Rechercher une correspondance partielle pour chaque mot-clé
+        
+        # Appliquer la recherche en utilisant le filtre Q
+        recommended_rides = Ride.objects.filter(query)
+
+        return render(request, 'trajet/recommended_rides.html', {'recommended_rides': recommended_rides})
+    else:
+        # Rediriger si l'utilisateur n'est pas connecté
+        return render(request, 'trajet/recommended_rides.html', {'error': 'You must be logged in to see recommended rides.'})

@@ -6,7 +6,7 @@
         <meta charset="utf-8">
         <title>Fithnity</title>
         
-        <link rel="icon" href="{% static 'img/icon.jpg' %}"  type="image/x-icon">
+        <link rel="icon" href="{% static 'img\voiture.png' %}"  type="image/x-icon">
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -30,7 +30,11 @@
         <!-- Template Stylesheet -->
         <link href="{% static 'css/style.css' %}" rel="stylesheet">
     </head>
-
+    <style>
+        a#Revenir:hover{
+           color: brown !important;
+        }
+    </style>
     <body>
 
         <!-- Spinner Start -->
@@ -47,7 +51,7 @@
         <div class="container-fluid nav-bar sticky-top px-0 px-lg-4 py-2 py-lg-0">
             <div class="container">
                 <nav class="navbar navbar-expand-lg navbar-light">
-                    <a href="" class="navbar-brand p-0">
+                    <a href="{% url 'home' %}" class="navbar-brand p-0">
                         <h1 class="display-6 text-primary"><i class="fas fa-car-alt me-3"></i></i>Fithnity</h1>
                         <!-- <img src="img/logo.png" alt="Logo"> -->
                     </a>
@@ -57,7 +61,7 @@
                     <div class="collapse navbar-collapse" id="navbarCollapse">
                         
                         </div>
-                        <a href="#" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
+                        <a href="{% url 'choix2' %}" class="btn btn-primary rounded-pill py-2 px-4">Register</a>
                     </div>
                 </nav>
             </div>
@@ -80,12 +84,17 @@
                                                 {% csrf_token %}
                                                 {{ form.as_p }}
                                                 <button  class="btn btn-primary w-100 py-2" type="submit">Login</button>
+                                                <div style="height: 20px;">
+
+                                                </div>
+                                            
+                                                <a href="{% url 'login_face' %}" style="color: azure;" id="Revenir">Se connecter avec la reconnaissance faciale</a>
                                             
                                                 <!-- Hidden field to pass the 'next' parameter for redirection -->
                                                 <input type="hidden" name="next" value="{{ next }}">
                                             </form>
+                                            <a href="{% url 'mailing' %}">forgot password </a>
                                         </div>
-                                        <a href="{% url 'mailing' %}">forgot password </a>
                                     </div>
                                 </div>
                             </div>
