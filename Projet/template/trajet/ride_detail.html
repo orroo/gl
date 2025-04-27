@@ -1,0 +1,70 @@
+{% include "../nav.html" %}
+{% load static %}
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Contact Us</h4>
+                <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                    <li class="breadcrumb-item active text-primary">Contact</li>
+                </ol>    
+            </div>
+        </div>
+        <!-- Header End -->
+        <body>
+             <!-- Ride Details Section -->
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-lg">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h2>Ride Details</h2>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title text-center mb-4">{{ ride.name }}</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item"><strong>Description:</strong> {{ ride.description }}</li>
+                            <li class="list-group-item"><strong>Departure Time:</strong> {{ ride.departure_time|date:"F j, Y, g:i A" }}</li>
+                            <li class="list-group-item"><strong>Start Point:</strong> {{ ride.start_point }}</li>
+                            <li class="list-group-item"><strong>Destination:</strong> {{ ride.destination }}</li>
+                            <li class="list-group-item"><strong>Available Seats:</strong> {{ ride.available_seats }}</li>
+                            <li class="list-group-item"><strong>Price:</strong> {{ ride.price }} DT</li>
+                            <li class="list-group-item"><strong>Trip Type:</strong> {{ ride.get_is_recurring_display }}</li>
+                            <li class="list-group-item"><strong>owner:</strong> {{ ride.owner }}</li>
+                            <li class="list-group-item"><strong>Created At:</strong> {{ ride.created_at|date:"F j, Y, g:i A" }}</li>
+                            <li class="list-group-item"><strong>Last Updated:</strong> {{ ride.updated_at|date:"F j, Y, g:i A" }}</li>
+                        </ul>
+                    </div>
+                    <div class="card-footer text-center">
+                        <a href="{% url 'ride_list' %}" class="btn btn-secondary">Back to List</a>
+                        <!-- ride_detail.html -->
+                        <a href="{% url 'reserve_ride' ride.pk %}" class="btn btn-primary">Reserve Ride</a>
+
+                        
+
+                  
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+            <!-- Ride Details -->
+         
+            <!-- Footer Scripts -->
+            <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        </body>
+
+        <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+        <script src="{% static 'js/wow.min.js' %}"></script>
+        <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+        <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+        <script src="{% static 'js/main.js' %}"></script>
+    </body>
+
+</html>

@@ -1,0 +1,152 @@
+{% include "../nav.html" %}
+
+{% load static %}
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Conducteur Profile</h4>
+  
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Profile</title>
+        </head>
+        <style>
+       
+
+            .profile-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                margin: 0;
+            }
+    
+            .profile-card {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                overflow: hidden;
+                max-width: 500px;
+                width: 100%;
+                text-align: center;
+                padding: 20px;
+            }
+    
+            .profile-card img {
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 4px solid #e9ecef;
+                margin-top: 10px;
+            }
+    
+            .profile-card h2 {
+                color: #343a40;
+                margin-top: 10px;
+            }
+    
+            .profile-card p {
+                color: #6c757d;
+                margin: 5px 0;
+                font-size: 16px;
+            }
+    
+            .profile-actions a {
+                text-decoration: none;
+                margin: 10px 5px;
+                display: inline-block;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-weight: bold;
+                transition: all 0.3s ease;
+            }
+    
+            .btn-update {
+                background-color: #1F2E4E;
+                color: #fff;
+            }
+    
+            .btn-update:hover {
+                color: #1F2E4E;
+                background-color: #fff;
+            }
+    
+            .btn-delete {
+                background-color: #dc3545;
+                color: #fff;
+            }
+    
+            .btn-delete:hover {
+                background-color: #c82333;
+            }
+    
+            .btn-return {
+                background-color: #EA001E;
+                color: #fff;
+            }
+    
+            .btn-return:hover {
+                color: #EA001E;
+                background-color: #fff;
+            }
+        </style>
+    </head>
+    <body>
+    
+    <!-- Profile Container -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <!-- Profile Photo -->
+            <img src="/{{ obj.photo }}" alt="Profile Image">
+    
+            <!-- User Info -->
+            <h2>{{ obj.username }}</h2>
+            <p><strong>nom : </strong>{{ obj.nom }}</p>
+            <p><strong>prenom : </strong>{{ obj.prenom }}</p>
+            <p><strong>cin : </strong>{{ obj.cin }}</p>
+            <p><strong>numero de telephone : </strong>{{ obj.num_tel }}</p>
+            <p><strong>mail : </strong>{{ obj.mail }}</p>
+            <p><strong>adresse : </strong>{{ obj.adresse }}</p>
+            <p><strong>date de naissance : </strong>{{ obj.date_naissance }}</p>
+            <p><strong>role : </strong>{{ obj.role }}</p>
+            <!-- <p><strong>mot de passe : </strong>{{ obj.password }}</p> -->
+            <p><strong>nombre de jetons : </strong>{{ obj.nb_jetons }}</p>
+           
+    
+            <!-- Buttons -->
+            <div class="profile-actions">
+                <a href="{% url 'passager_update' obj.id %}" class="btn-update">
+                    <i class="fas fa-edit"></i> Update
+                </a>
+                
+                <a href="{% url 'welcome' %}" class="btn-return">
+                    <i class="fas fa-arrow-left"></i> Return
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    
+
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+

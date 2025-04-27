@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Fithnity</title>
+        <link rel="icon" href="{% static 'img\voiture.png' %}"  type="image/x-icon">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link href="../static/lib/animate/animate.min.css" rel="stylesheet">
+        <link href="../static/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+        <!-- Customized Bootstrap Stylesheet -->
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Template Stylesheet -->
+        <link href="../static/css/style.css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+
+        <!-- Topbar Start -->
+        <div class="container-fluid topbar bg-secondary d-none d-xl-block w-100">
+            <div class="container">
+                <div class="row gx-0 align-items-center" style="height: 45px;">
+                    <div class="col-lg-6 text-center text-lg-start mb-lg-0">
+                        <div class="d-flex flex-wrap">
+                            <a href="approve.html" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Approving</a>
+                            <a href="{% url 'stat_avis' %}" class="text-muted me-4"><i class="fas fa-map-marker-alt text-primary me-2"></i>Statistics</a>
+                            
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <!-- Topbar End -->
+
+
+
+        <!-- Header Start -->
+        <div class="container-fluid bg-breadcrumb">
+            <div class="container text-center py-5" style="max-width: 900px;">
+                <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Approving Reviews</h4>
+  
+            </div>
+        </div>
+        <!-- Header End -->
+
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Avis</title>
+        </head>
+        <body>
+            <div style="display: flex; justify-content: center; align-items: center; height: 10vh;">
+                <h1 class="text-primary" style="font-family: 'Playfair Display', serif;">Reviews to approve</h1>
+            </div>
+            
+            <ul>
+                {% for review_item in reviews_with_analysis %}
+                <li>
+                    <div class="p-5 bg-light rounded shadow-sm">
+                        <div class="bg-white rounded p-4 mb-4 border">
+                            <!-- Display who posted and who received the review -->
+                            <p>
+                                <strong style="color: #1a2540; font-size: 1.1em;">
+                                    {{ review_item.avis.author.username }}
+                                </strong>
+                                <span style="color: #555;">left a review for</span>
+                                <strong style="color: #ff0000; font-size: 1.1em;">
+                                    {{ review_item.avis.recipient.name }}
+                                </strong>:
+                            </p>
+            
+                            <!-- Display rating with real stars -->
+                            <p class="mb-2">
+                                <span style="font-size: 1.2em; color: 
+                                    {% if review_item.avis.rating == 1 %} darkred;
+                                    {% elif review_item.avis.rating == 2 %} lightcoral;
+                                    {% elif review_item.avis.rating == 3 %} orange;
+                                    {% elif review_item.avis.rating == 4 %} darkgreen;
+                                    {% else %} black; {% endif %}
+                                ">
+                                    {% for i in "12345"|slice:":review_item.avis.rating" %}
+                                        ⭐
+                                    {% endfor %}
+                                </span>
+                                <span style="color: #888;">({{ review_item.avis.rating }} Stars)</span>
+                            </p>
+            
+                            <!-- Highlight bad words in the comment -->
+                            <p>
+                                {% for word in bad_words %}
+                                    {% if word in review_item.avis.comment %}
+                                        <span style="color:red; font-weight: bold;">|{{ word }}|</span>
+                                    {% endif %}
+                                {% endfor %}
+                                <span style="font-size: 1em; font-style: italic; color: #333;">
+                                    {{ review_item.avis.comment }}
+                                </span>
+                            </p>
+            
+                            <!-- Display the review date -->
+                            <p style="color: #666; font-size: 0.9em;">
+                                <em>Reviewed on {{ review_item.avis.date }}</em>
+                            </p>
+                                
+                                <!-- Display Violence & Emotion Analysis -->
+
+                                 <p>
+                                    <strong style="color: #ff0000; font-size: 1.2em; font-family: Arial, sans-serif;">
+                                        🔍 Violence Analysis:
+                                    </strong> 
+                                    <span style="font-size: 1.1em; font-style: italic; color: #333;">
+                                        {{ review_item.analysis }}
+                                    </span>
+                                </p>
+                                <p>
+                                    <strong style="color: #1a2540; font-size: 1.2em; font-family: Arial, sans-serif;">
+                                        😊 Emotion Analysis:
+                                    </strong> 
+                                    <span style="font-size: 1.1em; font-style: italic; color: #333;">
+                                        {{ review_item.emotions }}
+                                    </span>
+                                </p>
+                                
+                                
+                                
+                                <!-- Approve and Disapprove Buttons -->
+                                <div class="mt-3">
+                                    <a href="{% url 'approve_avis' review_item.avis.pk %}" 
+                                    class="btn rounded py-3 px-5" 
+                                    style="background-color: #1a2540; color: white; border: none;" 
+                                    onmouseover="this.style.backgroundColor='#ff0000';" 
+                                    onmouseout="this.style.backgroundColor='#1a2540';">
+                                    Approve
+                                 </a>
+                                 
+
+                                    <a href="{% url 'disapprove_avis' review_item.avis.pk %}" class="btn btn-primary rounded py-3 px-5">Disapprove</a>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                {% empty %}
+                    <h4>No Reviews to Approve for the moment.</h4>
+                {% endfor %}
+            </ul>
+        
+            <div style="display: flex; justify-content: center; width: 100%; padding-top: 50px; gap: 20px;">
+                <a href="?sort_by=rating_desc" class="btn btn-primary rounded py-3 px-5">Filter(Descending)</a>
+                <a href="{% url 'stat_avis' %}" class="btn btn-primary rounded py-3 px-5">
+                  Statistics
+                </a>
+            </div>
+        </body>
+        
+        </html>
+        
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+
+        
+    <!-- JavaScript Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/wow/wow.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib/counterup/counterup.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+    
+
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+    </body>
+
+</html>

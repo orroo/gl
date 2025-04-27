@@ -1,0 +1,47 @@
+
+{% include "../nav.html" %}
+{% load static %}
+    <!-- Header Start -->
+    <div class="container-fluid bg-breadcrumb">
+        <div class="container text-center py-5" style="max-width: 900px;">
+            <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">My Reservations</h4>
+            <ol class="breadcrumb d-flex justify-content-center mb-0 wow fadeInDown" data-wow-delay="0.3s">
+                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-primary">My Reservations</li>
+            </ol>    
+        </div>
+    </div>
+    <!-- Header End -->
+
+    <!-- Back to List Button -->
+    <div class="text-center mb-4">
+        <a href="{% url 'ride_list' %}" class="btn btn-danger">Back to Rides</a>
+    </div>
+
+    <!-- Reservation Cards -->
+    <div class="container mt-5">
+        <div class="row">
+            {% for reservation in reservations %}
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ reservation.ride.name }}</h5>
+                        <p class="card-text"><strong>Start Point:</strong> {{ reservation.ride.start_point }}</p>
+                        <p class="card-text"><strong>Destination:</strong> {{ reservation.ride.destination }}</p>
+                        <p class="card-text"><strong>Reservation Date:</strong> {{ reservation.reservation_date|date:"F j, Y, g:i A" }}</p>
+        
+                        <form method="post" action="{% url 'cancel_reservation' reservation.pk %}" class="d-flex justify-content-center">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Cancel Reservation</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <p class="text-center">No reservations found.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+{% include "../footer.html" %}

@@ -1,0 +1,125 @@
+{% include "../nav.html" %}
+{% load static %}
+<style> 
+    textarea{
+        max-height: 100px;
+    }
+</style>
+
+<!-- Carousel Start -->
+<div class="header-carousel">
+    <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+        <ol class="carousel-indicators">
+            <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+            <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+            <div class="carousel-item active">
+                <img src="{% static 'img/covoiturage.jpg' %}" class="img-fluid w-100" alt="First slide"/>
+                <div class="carousel-caption">
+                    <div class="container py-4">
+                        <div class="row g-5">
+                            <div class="col-lg-6 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1s" style="animation-delay: 1s;">
+                                <div class="bg-secondary rounded p-5">
+                                    <h4 class="text-white mb-4">CREATE A RIDE</h4>
+                                    <!-- Create a form to bind with RideForm -->
+                                    <form method="POST" action="{% url 'create_ride' %}">
+                                        {% csrf_token %}
+                                        <div class="row g-3">
+                                            
+                                            <!-- Name Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-user"></span> <span class="ms-1">{{ form.name.label }}</span>
+                                                    </div>
+                                                    {{ form.name }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Description Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-info-circle"></span> <span class="ms-1">{{ form.description.label }}</span>
+                                                    </div>
+                                                    {{ form.description }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Available Seats Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-chair"></span> <span class="ms-1">{{ form.available_seats.label }}</span>
+                                                    </div>
+                                                    {{ form.available_seats }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Price Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-dollar-sign"></span> <span class="ms-1">{{ form.price.label }}</span>
+                                                    </div>
+                                                    {{ form.price }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Start Point Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">{{ form.start_point.label }}</span>
+                                                    </div>
+                                                    {{ form.start_point }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Destination Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-map-marker-alt"></span> <span class="ms-1">{{ form.destination.label }}</span>
+                                                    </div>
+                                                    {{ form.destination }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Departure Time Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-calendar-alt"></span><span class="ms-1">{{ form.departure_time.label }}</span>
+                                                    </div>
+                                                    {{ form.departure_time }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Recurring Field -->
+                                            <div class="col-12">
+                                                <div class="input-group">
+                                                    <div class="d-flex align-items-center bg-light text-body rounded-start p-2">
+                                                        <span class="fas fa-repeat"></span><span class="ms-1">{{ form.is_recurring.label }}</span>
+                                                    </div>
+                                                    {{ form.is_recurring }}
+                                                </div>
+                                            </div>
+
+                                            <!-- Submit Button -->
+                                            <div class="col-12">
+                                                <button class="btn btn-light w-100 py-2" type="submit">Create Ride</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Carousel End -->

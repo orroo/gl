@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+    {% include "nav.html" %}
+    {% load static %}
+            <!-- Carousel Start -->
+            <div class="header-carousel">
+                <div id="carouselId" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselId" data-bs-slide-to="0" class="active" aria-current="true" aria-label="First slide"></li>
+                        <li data-bs-target="#carouselId" data-bs-slide-to="1" aria-label="Second slide"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        <div class="carousel-item active">
+                            <img src="{% static 'img/covoiturage.jpeg'%}" class="img-fluid w-100" alt="First slide"/>
+                            <div class="carousel-caption">
+                                <div class="container py-4">
+                                    <div class="row g-5">
+        
+                                        <div class="col-lg-6 d-none d-lg-flex fadeInRight animated" data-animation="fadeInRight" data-delay="1s" style="animation-delay: 1s;">
+                                            <div class="text-start">
+                                                <h1 class="display-5 text-white">Welcome to Fithnity the ESPRIT carpooling app!</h1>
+                                                <p></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+            
+                    </div>
+                </div>
+            </div>
+            <!-- Carousel End -->
+    
+            <!-- About Start -->
+            <div class="container-fluid overflow-hidden about py-5">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-xl-6 wow fadeInLeft" data-wow-delay="0.2s">
+                            <div class="about-item">
+                                <div class="pb-5">
+                                    <h1 class="display-5 text-capitalize">Fithnity <span class="text-primary">About</span></h1>
+                                    <p class="mb-0">Fithnity is a carpooling app designed for ESPRIT students, enabling them to share daily commutes in an affordable and eco-friendly way. It connects drivers and passengers through a secure and convenient platform.
+                                    </p>
+                                </div>
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="about-item-inner border p-4">
+                                            <div class="about-icon mb-4">
+                                                <img src="../static/img/about-icon-1.png" class="img-fluid w-50 h-50" alt="Icon">
+                                            </div>
+                                            <h5 class="mb-3">Our Vision</h5>
+                                            <p class="mb-0">Sustainable Mobility, Student Connection</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="about-item-inner border p-4">
+                                            <div class="about-icon mb-4">
+                                                <img src="../static/img/about-icon-2.png" class="img-fluid h-50 w-50" alt="Icon">
+                                            </div>
+                                            <h5 class="mb-3">Our Mision</h5>
+                                            <p class="mb-0">Promote Sustainability, Simplify Commuting.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="text-item my-4">Join Fithnity for a secure, affordable, and eco-friendly carpooling experience. Verified profiles, transparent ratings, and a user-friendly platform ensure a safe and enjoyable journey for ESPRIT students.
+                                </p>
+                                <div class="row g-4">
+                                    <div class="col-lg-6">
+                                        <div class="text-center rounded bg-secondary p-4">
+                                            <h1 class="display-6 text-white">Fithnity</h1>
+                                            <h5 class="text-light mb-0">advantages</h5>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="rounded">
+                                            <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Security</p>
+                                            <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Cost-Effective</p>
+                                            <p class="mb-2"><i class="fa fa-check-circle text-primary me-1"></i> Eco-Friendly</p>
+                                            <p class="mb-0"><i class="fa fa-check-circle text-primary me-1"></i>Convenient</p>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 wow fadeInRight" data-wow-delay="0.2s">
+                            <div class="about-img">
+                                <div class="img-1">
+                                    <img src="../static/img/about-img.jpg" class="img-fluid rounded h-100 w-100" alt="">
+                                </div>
+                                <div class="img-2">
+                                    <img src="../static/img/covoiturage.jpeg" class="img-fluid rounded w-100" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- About End -->
+    
+            <!-- Fact Counter -->
+            <div class="container-fluid counter bg-secondary py-5">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="counter-item text-center">
+                                <div class="counter-item-icon mx-auto">
+                                    <i class="fas fa-thumbs-up fa-2x"></i>
+                                </div>
+                                <div class="counter-counting my-3">
+                                    <span class="text-white fs-2 fw-bold" data-toggle="counter-up">829</span>
+                                    <span class="h1 fw-bold text-white">+</span>
+                                </div>
+                                <h4 class="text-white mb-0">Happy Clients</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="counter-item text-center">
+                                <div class="counter-item-icon mx-auto">
+                                    <i class="fas fa-car-alt fa-2x"></i>
+                                </div>
+                                <div class="counter-counting my-3">
+                                    <span class="text-white fs-2 fw-bold" data-toggle="counter-up">56</span>
+                                    <span class="h1 fw-bold text-white">+</span>
+                                </div>
+                                <h4 class="text-white mb-0">Number of Cars</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="counter-item text-center">
+                                <div class="counter-item-icon mx-auto">
+                                    <i class="fas fa-building fa-2x"></i>
+                                </div>
+                                <div class="counter-counting my-3">
+                                    <span class="text-white fs-2 fw-bold" data-toggle="counter-up">127</span>
+                                    <span class="h1 fw-bold text-white">+</span>
+                                </div>
+                                <h4 class="text-white mb-0">Car Center</h4>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-lg-6 col-xl-3 wow fadeInUp" data-wow-delay="0.7s">
+                            <div class="counter-item text-center">
+                                <div class="counter-item-icon mx-auto">
+                                    <i class="fas fa-clock fa-2x"></i>
+                                </div>
+                                <div class="counter-counting my-3">
+                                    <span class="text-white fs-2 fw-bold" data-toggle="counter-up">589</span>
+                                    <span class="h1 fw-bold text-white">+</span>
+                                </div>
+                                <h4 class="text-white mb-0">Total kilometers</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Fact Counter -->
+    
+            <!-- Services Start -->
+            <div class="container-fluid service py-5">
+                <div class="container py-5">
+                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                        <h1 class="display-5 text-capitalize mb-3">Fithnity <span class="text-primary">Services</span></h1>
+                        <p class="mb-0">Fithnity, your student mobility companion!
+                        </p>
+                    </div>
+                    <div class="row g-4">
+                        
+                     
+                        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="service-item p-4">
+                                <div class="service-icon mb-4">
+                                    <i class="fa fa-road fa-2x"></i>
+                                </div>
+                                <h5 class="mb-3">Create a Ride</h5>
+                                <p class="mb-0">As a driver, offer your trips and share available seats.</p>
+                            </div>
+                        </div>
+                      
+        
+                        <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="service-item p-4">
+                                <div class="service-icon mb-4">
+                                    <i class="fa fa-car-alt fa-2x"></i>
+                                </div>
+                                <h5 class="mb-3">Book a Ride</h5>
+                                <p class="mb-0">As a passenger, easily find and book rides that suit your needs.</p>
+                            </div>
+                        </div>
+                           <div class="col-md-6 col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="service-item p-4">
+                                <div class="service-icon mb-4">
+                                    <i class="fa fa-money-bill-alt fa-2x"></i>
+                                </div>
+                                <h5 class="mb-3">Browse the Catalog</h5>
+                                <p class="mb-0">Explore available offers and enjoy convenient, secure carpooling.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Services End -->
+    
+        
+    
+            <!-- Car Steps Start -->
+            <div class="container-fluid steps py-5">
+                <div class="container py-5">
+                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 800px;">
+                        <h1 class="display-5 text-capitalize text-white mb-3">Fithnity<span class="text-primary"> Process</span></h1>
+                        <p class="mb-0 text-white">Join us today and make your travels easier with Fithnity.To join Fithnity, follow these simple steps:
+                        </p>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="steps-item p-4 mb-4">
+                                <h4>Create an Account </h4>
+                                <p class="mb-0">Sign up quickly and become part of our community.</p>
+                                <div class="setps-number">01.</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.3s">
+                            <div class="steps-item p-4 mb-4">
+                                <h4>Log In</h4>
+                                <p class="mb-0">Access your personalized dashboard to explore our features</p>
+                                <div class="setps-number">02.</div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 wow fadeInUp" data-wow-delay="0.5s">
+                            <div class="steps-item p-4 mb-4">
+                                <h4>Enjoy the Experience</h4>
+                                <p class="mb-0">Book rides, offer trips, and enjoy secure, convenient carpooling.</p>
+                                <div class="setps-number">03.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Car Steps End -->
+    
+        
+    <div style="height: 100px;">
+    
+    </div>
+            
+    
+            
+    {% include "footer.html" %}
+    {% if request.GET.username %}
+    <script>
+        alert("Bienvenue, {{ request.GET.username }} !");
+    </script>
+{% endif %}
+  
+  
+
+    
+            <!-- Back to Top -->
+            <a href="#" class="btn btn-secondary btn-lg-square rounded-circle back-to-top"><i class="fa fa-arrow-up"></i></a>   
+    
+            
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/lib/wow/wow.min.js"></script>
+        <script src="../static/lib/easing/easing.min.js"></script>
+        <script src="../static/lib/waypoints/waypoints.min.js"></script>
+        <script src="../static/lib/counterup/counterup.min.js"></script>
+        <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+        
+    
+        <!-- Template Javascript -->
+        <script src="../static/js/main.js"></script>
+        <!-- SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        </body>
+    
+    </html>
+
+
